@@ -22,7 +22,7 @@ class PageController extends Controller
     {
         parent::__construct($view, $flash);
         $this->mailer           = $mailer;
-        $this->userModel        = $userModel;
+
         $this->entityFactory    = $entityFactory;
     }
 
