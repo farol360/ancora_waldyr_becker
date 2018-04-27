@@ -38,7 +38,7 @@ class BaseDataMigration extends AbstractMigration
             [
                 'resource' => '/',
                 'description' => 'Página inicial',
-                'role_id' => 1
+                'role_id' => 4
             ],
             [
                 'resource' => '/users/signin',
