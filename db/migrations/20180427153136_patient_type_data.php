@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class PatientMigration extends AbstractMigration
+class PatientTypeData extends AbstractMigration
 {
     /**
      * Change Method.
@@ -25,13 +25,15 @@ class PatientMigration extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change()
-    {
-        $patients = $this->table('patients');
-        $patients->addColumn('id_user', 'integer');
-        $patients->addColumn('id_patient_type', 'integer');
-        $patients->addColumn('id_disease', 'integer');
-        $patients->create();
+    public function up() {
+        $patient_types = [
+            [
+                'id' => 1,
+                'name' => 'default',
+                'description' => 'Tipo padrão de paciente.'
 
+
+            ]
+        ];
     }
 }

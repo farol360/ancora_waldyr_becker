@@ -13,14 +13,16 @@ class PatientModel extends Model
         $sql = "
             INSERT INTO patients (
                 id_user,
-                id_patient_type
+                id_patient_type,
+                id_disease
                 )
-            VALUES (:id_user, :id_patient_type)
+            VALUES (:id_user, :id_patient_type, :id_disease)
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
             ':id_user'          => $patient->id_user,
-            ':id_patient_type'  => $patient->id_patient_type
+            ':id_patient_type'  => $patient->id_patient_type,
+            ':id_disease'       => $patient->id_disease
 
         ];
         if ($query->execute($parameters)) {
@@ -43,9 +45,12 @@ class PatientModel extends Model
         $sql = "
             SELECT
                 patients.*,
-                users.*
+                users.*,
+                diseases.*
             FROM
-                patients LEFT JOIN users ON users.id = patients.id_user
+                patients
+                LEFT JOIN users ON users.id = patients.id_user
+                LEFT JOIN diseases ON patients.id_disease = diseases.id
             WHERE
                 id = :id
             LIMIT 1
@@ -62,9 +67,11 @@ class PatientModel extends Model
         $sql = "
             SELECT
                 patients.*,
-                users.*
+                users.*,
+                diseases.*
             FROM
                 patients LEFT JOIN users ON users.id = patients.id_user
+            LEFT JOIN diseases ON patients.id_disease = diseases.id
             ORDER BY
                 id ASC
         ";
@@ -81,7 +88,8 @@ class PatientModel extends Model
                 patients
             SET
                 id_user         = :id_user,
-                id_patient_type = :id_patient_type
+                id_patient_type = :id_patient_type,
+                id_disease      = :id_disease
             WHERE
                 id = :id
         ";
@@ -89,6 +97,7 @@ class PatientModel extends Model
         $parameters = [
             ':id_user'          => $patient->id_user,
             ':id_patient_type'  => $patient->id_patient_type,
+            ':id_disease'       => $patient->id_disease,
             ':id'               => $patient->id
         ];
         return $query->execute($parameters);

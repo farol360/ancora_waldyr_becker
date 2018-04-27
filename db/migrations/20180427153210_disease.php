@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class PatientMigration extends AbstractMigration
+class Disease extends AbstractMigration
 {
     /**
      * Change Method.
@@ -27,11 +27,11 @@ class PatientMigration extends AbstractMigration
      */
     public function change()
     {
-        $patients = $this->table('patients');
-        $patients->addColumn('id_user', 'integer');
-        $patients->addColumn('id_patient_type', 'integer');
-        $patients->addColumn('id_disease', 'integer');
-        $patients->create();
-
+        $diseases = $this->table('diseases');
+        $diseases->addColumn('name', 'string');
+        $diseases->addColumn('description', 'string');
+        $diseases->addColumn('cid_version', 'string');
+        $diseases->addColumn('cid_code', 'string');
+        $diseases->create();
     }
 }
