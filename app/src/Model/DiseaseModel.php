@@ -83,7 +83,7 @@ class DiseaseModel extends Model
     {
         $sql = "
             UPDATE
-                disease
+                diseases
             SET
                 name            = :name,
                 description     = :description,

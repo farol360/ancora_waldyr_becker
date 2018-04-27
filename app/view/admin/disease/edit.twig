@@ -1,0 +1,60 @@
+{% extends "admin/layout.twig" %}
+{% block html_title %}Cargos - Administração - {{ parent() }}{% endblock %}
+{% set nav_active = 'role' %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{{ base_url() }}/admin">Início</a></li>
+  <li><a href="{{ base_url() }}/admin/diseases">Doenças</a></li>
+  <li class="active">Editar</li>
+  <li>{{ disease.name }}</li>
+</ol>
+{% endblock %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header" data-background-color="blue">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Editar Doença</h3>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <form role="form" data-toggle="validator" action="{{ base_url() }}/admin/diseases/update" method="POST">
+        <input type="hidden" name="id" value="{{ disease.id }}">
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input class="form-control" id="name" type="text" name="name" placeholder="Nome" autofocus required value="{{ disease.name }}">
+
+          </div>
+          <div class="form-group">
+            <label for="description">Descrição:</label>
+            <input id="description" class="form-control" type="text" name="description" placeholder="Descrição" required value="{{ disease.description }}">
+          </div>
+
+          <div class="form-group">
+            <label for="cid_version">CID Versão:</label>
+            <input id="cid_version" class="form-control form-group" type="text" name="cid_version" placeholder="Nível de acesso" required value="{{ disease.cid_version }}">
+          </div>
+
+          <div class="form-group">
+            <label for="cid_code">CID Código:</label>
+            <input id="cid_code" class="form-control form-group" type="text" name="cid_code" placeholder="Nível de acesso" required value="{{ disease.cid_code }}">
+          </div>
+
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+{% endblock %}

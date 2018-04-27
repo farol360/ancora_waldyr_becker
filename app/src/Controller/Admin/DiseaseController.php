@@ -32,9 +32,55 @@ class DiseaseController extends Controller
 
     public function index(Request $request, Response $response): Response
     {
-
         $diseases = $this->diseaseModel->getAll();
 
         return $this->view->render($response, 'admin/disease/index.twig', ['diseases' => $diseases]);
+    }
+
+    public function add(Request $request, Response $response): Response
+    {
+        if (empty($request->getParsedBody())) {
+            return $this->view->render($response, 'admin/disease/add.twig');
+        }
+
+        $disease = $request->getParsedBody();
+
+        $disease = $this->entityFactory->createDisease($request->getParsedBody());
+
+        $this->diseaseModel->add($disease);
+
+
+
+        $this->flash->addMessage('success', 'Doença adicionada com sucesso.');
+        return $this->httpRedirect($request, $response, '/admin/diseases');
+    }
+
+    public function delete(Request $request, Response $response, array $args): Response
+    {
+        $id = intval($args['id']);
+        $this->diseaseModel->delete($id);
+
+        $this->flash->addMessage('success', 'Doença removida com sucesso.');
+        return $this->httpRedirect($request, $response, '/admin/diseases');
+    }
+
+    public function edit(Request $request, Response $response, array $args): Response
+    {
+        $id = intval($args['id']);
+        $disease = $this->diseaseModel->get($id);
+        if (!$disease) {
+            $this->flash->addMessage('danger', 'Doença não encontrada.');
+            return $this->httpRedirect($request, $response, '/admin/disease');
+        }
+        return $this->view->render($response, 'admin/disease/edit.twig', ['disease' => $disease]);
+    }
+
+    public function update(Request $request, Response $response): Response
+    {
+        $disease = $this->entityFactory->createDisease($request->getParsedBody());
+        $this->diseaseModel->update($disease);
+
+        $this->flash->addMessage('success', 'Cargo atualizado com sucesso.');
+        return $this->httpRedirect($request, $response, '/admin/diseases');
     }
 }
