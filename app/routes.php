@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 // includes
 use Farol360\Ancora\Controller\Admin\IndexController as IndexAdmin;
+use Farol360\Ancora\Controller\Admin\DiseaseController as DiseaseAdmin;
+use Farol360\Ancora\Controller\Admin\PatientController as PatientAdmin;
 use Farol360\Ancora\Controller\Admin\PermissionController as PermissionAdmin;
 use Farol360\Ancora\Controller\Admin\RoleController as RoleAdmin;
 use Farol360\Ancora\Controller\Admin\UserController as UserAdmin;
@@ -17,6 +19,22 @@ $app->get('[/]', Page::class . ':index');
 
 $app->group('/admin', function () {
     $this->get('[/]', IndexAdmin::class . ':index');
+
+    $this->group('/diseases', function() {
+        $this->get('[/]', DiseaseAdmin::class . ':index');
+        $this->map(['GET', 'POST'], '/add', DiseaseAdmin::class . ':add');
+        $this->get('/remove/{id:[0-9]+}', DiseaseAdmin::class . ':delete');
+        $this->get('/edit/{id:[0-9]+}', DiseaseAdmin::class . ':edit');
+        $this->post('/update', DiseaseAdmin::class . ':update');
+    });
+
+    $this->group('/patients', function() {
+        $this->get('[/]', PatientAdmin::class . ':index');
+        $this->map(['GET', 'POST'], '/add', PatientAdmin::class . ':add');
+        $this->get('/remove/{id:[0-9]+}', PatientAdmin::class . ':delete');
+        $this->get('/edit/{id:[0-9]+}', PatientAdmin::class . ':edit');
+        $this->post('/update', PatientAdmin::class . ':update');
+    });
 
     $this->group('/permission', function () {
         $this->get('[/]', PermissionAdmin::class . ':index');

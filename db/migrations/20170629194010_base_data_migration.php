@@ -61,6 +61,56 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 2,
             ],
             [
+                'resource' => '/admin/diseases',
+                'description' => 'Administração de Doenças.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/diseases/add',
+                'description' => 'Administração de Doenças -Add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/diseases/edit/:id',
+                'description' => 'Administração de Doenças - Edit.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/diseases/remove/:id',
+                'description' => 'Administração de Doenças - Remove.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/diseases/update',
+                'description' => 'Administração de Doenças - update.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/patients',
+                'description' => 'Administração de Pacientes.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/patients/add',
+                'description' => 'Administração de Pacientes -Add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/patients/edit/:id',
+                'description' => 'Administração de Pacientes - Edit.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/patients/remove/:id',
+                'description' => 'Administração de Pacientes - Remove.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/patients/update',
+                'description' => 'Administração de Pacientes - update.',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/permission',
                 'description' => 'Ver permissões',
                 'role_id' => 3,

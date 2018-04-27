@@ -60,7 +60,7 @@ class DiseaseModel extends Model
         return $query->fetch();
     }
 
-    public function getAll(): array
+    public function getAll(int $offset = 0, int $limit = PHP_INT_MAX): array
     {
         $sql = "
             SELECT
@@ -68,9 +68,12 @@ class DiseaseModel extends Model
             FROM
                 diseases
             ORDER BY
-                id ASC
+                cid_version, cid_code
+            LIMIT ? , ?
         ";
         $query = $this->db->prepare($sql);
+        $query->bindValue(1, $offset, \PDO::PARAM_INT);
+        $query->bindValue(2, $limit, \PDO::PARAM_INT);
         $query->execute();
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Disease::class);
         return $query->fetchAll();

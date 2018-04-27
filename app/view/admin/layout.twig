@@ -42,7 +42,7 @@
       <div class="sidebar" data-color="purple" {# data-image="{{ base_url() }}/img/sidebar-1.jpg" #}>
         <div class="logo">
           <a href="{{ base_url() }}/admin" class="simple-text">
-            Ancora
+            F.A.P. Gestão
           </a>
         </div>
         <div class="sidebar-wrapper">
@@ -52,7 +52,34 @@
                 <i class="material-icons">
                   dashboard
                 </i>
-                <p>Dashboard</p>
+                <p>Painel Inicial</p>
+              </a>
+            </li>
+
+            <li {% if nav_active == "patients" %} class="active" {% endif %}>
+              <a href="{{ base_url }}/patients">
+                <i class="material-icons">
+                  accessibility
+                </i>
+                <p>Pacientes</p>
+              </a>
+            </li>
+
+            <li {% if nav_active == "professionals" %} class="active" {% endif %}>
+              <a href="{{ base_url }}/professionals">
+                <i class="material-icons">
+                  portrait
+                </i>
+                <p>Profissionais</p>
+              </a>
+            </li>
+
+            <li {% if nav_active == "attendance" %} class="active" {% endif %}>
+              <a href="{{ base_url }}/attendance">
+                <i class="material-icons">
+                  assignment
+                </i>
+                <p>Atendimentos</p>
               </a>
             </li>
 
@@ -73,6 +100,15 @@
             </div>
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <p>Administração</p>
+                  </a>
+                  <ul class="dropdown-menu">
+                    {% if p_admin_diseases %}<li><a href="{{ base_url() }}/admin/diseases">Doenças</a></li>{% endif %}
+                  </ul>
+                </li>
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     {#<img src="{{ gravatar_url(get_email(), 16) }}">#}
@@ -143,23 +179,23 @@
             <nav class="pull-left">
               <ul>
                 <li>
-                  <a href="#">
+                  <a href="https://farol360.com.br/">
                       Farol 360
                   </a>
                 </li>
 
                 <li>
-                  <a href="#">
+                  <a href="https://farol360.com.br/portfolio">
                       Portfolio
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="https://farol360.com.br/blog">
                       Blog
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="#https://farol360.com.br/suporte">
                       Suporte
                   </a>
                 </li>

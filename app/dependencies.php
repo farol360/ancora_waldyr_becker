@@ -120,6 +120,15 @@ Farol360\Ancora\User::setupUser($container);
 // ------------------
 // ------------------
 
+$container['Farol360\Ancora\Controller\Admin\DiseaseController'] = function ($c) {
+    return new Farol360\Ancora\Controller\Admin\DiseaseController(
+        $c['view'],
+        $c['flash'],
+        new Farol360\Ancora\Model\DiseaseModel($c['db']),
+        new Farol360\Ancora\Model\EntityFactory()
+    );
+};
+
 $container['Farol360\Ancora\Controller\Admin\IndexController'] = function ($c) {
     return new Farol360\Ancora\Controller\Admin\IndexController(
         $c['view'],
