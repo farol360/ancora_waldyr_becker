@@ -136,6 +136,17 @@ $container['Farol360\Ancora\Controller\Admin\IndexController'] = function ($c) {
     );
 };
 
+$container['Farol360\Ancora\Controller\Admin\PatientController'] = function ($c) {
+    return new Farol360\Ancora\Controller\Admin\PatientController(
+        $c['view'],
+        $c['flash'],
+        new Farol360\Ancora\Model\PatientModel($c['db']),
+        new Farol360\Ancora\Model\DiseaseModel($c['db']),
+        new Farol360\Ancora\Model\UserModel($c['db']),
+        new Farol360\Ancora\Model\EntityFactory()
+    );
+};
+
 $container['Farol360\Ancora\Controller\Admin\PermissionController'] = function ($c) {
     return new Farol360\Ancora\Controller\Admin\PermissionController(
         $c['view'],

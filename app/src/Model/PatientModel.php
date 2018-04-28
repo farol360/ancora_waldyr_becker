@@ -46,11 +46,14 @@ class PatientModel extends Model
             SELECT
                 patients.*,
                 users.*,
-                diseases.*
+                users.*,
+                diseases.name as disease_name,
+                diseases.description as disease_description,
+                diseases.cid_version as disease_cid_version,
+                diseases.cid_code as diseases_cid_code
             FROM
-                patients
-                LEFT JOIN users ON users.id = patients.id_user
-                LEFT JOIN diseases ON patients.id_disease = diseases.id
+                patients LEFT JOIN users ON users.id = patients.id_user
+            LEFT JOIN diseases ON patients.id_disease = diseases.id
             WHERE
                 id = :id
             LIMIT 1
@@ -68,12 +71,16 @@ class PatientModel extends Model
             SELECT
                 patients.*,
                 users.*,
-                diseases.*
+                users.*,
+                diseases.name as disease_name,
+                diseases.description as disease_description,
+                diseases.cid_version as disease_cid_version,
+                diseases.cid_code as disease_cid_code
             FROM
                 patients LEFT JOIN users ON users.id = patients.id_user
             LEFT JOIN diseases ON patients.id_disease = diseases.id
             ORDER BY
-                id ASC
+                patients.id ASC
         ";
         $query = $this->db->prepare($sql);
         $query->execute();

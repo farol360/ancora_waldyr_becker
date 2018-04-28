@@ -35,5 +35,7 @@ class PatientTypeData extends AbstractMigration
 
             ]
         ];
+
+        $this->insert('patient_types', $patient_types);
     }
 }
