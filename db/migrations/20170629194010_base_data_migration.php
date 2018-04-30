@@ -183,6 +183,31 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 2,
             ],
             [
+                'resource' => '/admin/professional_types',
+                'description' => 'Administração de Cargos Profissionais.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professional_types/add',
+                'description' => 'Administração de Cargos profossionais -Add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professional_types/edit/:id',
+                'description' => 'Administração de Cargos Profossionais - Edit.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professional_types/remove/:id',
+                'description' => 'Administração de Cargos Profissionais - Remove.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professional_types/update',
+                'description' => 'Administração de Cargos Profossionais - update.',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/role',
                 'description' => 'Ver cargos',
                 'role_id' => 3,

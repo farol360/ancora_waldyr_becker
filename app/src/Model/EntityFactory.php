@@ -7,6 +7,8 @@ namespace Farol360\Ancora\Model;
 use Farol360\Ancora\Model\Disease;
 use Farol360\Ancora\Model\Patient;
 use Farol360\Ancora\Model\PatientType;
+use Farol360\Ancora\Model\Professional;
+use Farol360\Ancora\Model\ProfessionalType;
 
 // Ancora objects
 use Farol360\Ancora\Model\Permission;
@@ -30,6 +32,16 @@ class EntityFactory
     public function createPatientType(array $data = []): PatientType
     {
         return new PatientType($data);
+    }
+
+    public function createProfessional(array $data = []): Professional
+    {
+        return new Professional($data);
+    }
+
+    public function createProfessionalType(array $data = []): ProfessionalType
+    {
+        return new ProfessionalType($data);
     }
 
     // permission, users and role Classes

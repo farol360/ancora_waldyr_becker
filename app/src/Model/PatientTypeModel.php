@@ -8,10 +8,10 @@ use Farol360\Ancora\Model\PatientType;
 
 class PatientTypeModel extends Model
 {
-    public function add(Patient $patient)
+    public function add(PatientType $patient_type)
     {
         $sql = "
-            INSERT INTO patients (
+            INSERT INTO patient_types (
                 name,
                 description
                 )
@@ -19,8 +19,8 @@ class PatientTypeModel extends Model
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
-            ':name'          => $patient->name,
-            ':description'  => $patient->description,
+            ':name'          => $patient_type->name,
+            ':description'   => $patient_type->description,
 
         ];
         if ($query->execute($parameters)) {
@@ -32,7 +32,7 @@ class PatientTypeModel extends Model
 
     public function delete(int $id): bool
     {
-       $sql = "DELETE FROM patients WHERE id = :id";
+       $sql = "DELETE FROM patient_types WHERE id = :id";
         $query = $this->db->prepare($sql);
         $parameters = [':id' => $id];
         return $query->execute($parameters);
@@ -42,10 +42,9 @@ class PatientTypeModel extends Model
     {
         $sql = "
             SELECT
-                patients.*,
-                users.*
+                *
             FROM
-                patients LEFT JOIN users ON users.id = patients.id_user
+                patient_types
             WHERE
                 id = :id
             LIMIT 1
@@ -53,7 +52,7 @@ class PatientTypeModel extends Model
         $query = $this->db->prepare($sql);
         $parameters = [':id' => $id];
         $query->execute($parameters);
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Patient::class);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, PatientType::class);
         return $query->fetch();
     }
 
@@ -61,35 +60,33 @@ class PatientTypeModel extends Model
     {
         $sql = "
             SELECT
-                patients.*,
-                users.*
+               *
             FROM
-                patients LEFT JOIN users ON users.id = patients.id_user
+                patient_types
             ORDER BY
                 id ASC
         ";
         $query = $this->db->prepare($sql);
         $query->execute();
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Patient::class);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, PatientType::class);
         return $query->fetchAll();
     }
 
-    public function update(Patient $patient): bool
+    public function update(PatientType $patient_type): bool
     {
         $sql = "
             UPDATE
-                patients
+                patient_types
             SET
-                id_user         = :id_user,
-                id_patient_type = :id_patient_type
+                name         = :name,
+                description  = :description
             WHERE
                 id = :id
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
-            ':id_user'          => $patient->id_user,
-            ':id_patient_type'  => $patient->id_patient_type,
-            ':id'               => $patient->id
+            ':name'          => $patient->name,
+            ':description'  => $patient->description
         ];
         return $query->execute($parameters);
     }

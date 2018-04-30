@@ -7,6 +7,7 @@ use Farol360\Ancora\Controller\Admin\DiseaseController as DiseaseAdmin;
 use Farol360\Ancora\Controller\Admin\PatientController as PatientAdmin;
 use Farol360\Ancora\Controller\Admin\PermissionController as PermissionAdmin;
 use Farol360\Ancora\Controller\Admin\ProfessionalController as ProfessionalAdmin;
+use Farol360\Ancora\Controller\Admin\ProfessionalTypeController as ProfessionalTypeAdmin;
 use Farol360\Ancora\Controller\Admin\RoleController as RoleAdmin;
 use Farol360\Ancora\Controller\Admin\UserController as UserAdmin;
 
@@ -53,6 +54,15 @@ $app->group('/admin', function () {
         $this->get('/edit/{id:[0-9]+}', ProfessionalAdmin::class . ':edit');
         $this->post('/update', ProfessionalAdmin::class . ':update');
         $this->map(['GET', 'POST'],'/verifyUserByEmail', ProfessionalAdmin::class . ':verifyUserByEmail');
+    });
+
+    $this->group('/professional_types', function() {
+        $this->get('[/]', ProfessionalTypeAdmin::class . ':index');
+        $this->map(['GET', 'POST'], '/add', ProfessionalTypeAdmin::class . ':add');
+        $this->get('/remove/{id:[0-9]+}', ProfessionalTypeAdmin::class . ':delete');
+        $this->get('/edit/{id:[0-9]+}', ProfessionalTypeAdmin::class . ':edit');
+        $this->post('/update', ProfessionalTypeAdmin::class . ':update');
+
     });
 
     $this->group('/role', function () {
