@@ -153,6 +153,36 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 3,
             ],
             [
+                'resource' => '/admin/professionals',
+                'description' => 'Administração de Profissionais.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professionals/add',
+                'description' => 'Administração de profossionais -Add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professionals/edit/:id',
+                'description' => 'Administração de Profossionais - Edit.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professionals/remove/:id',
+                'description' => 'Administração de Profissionais - Remove.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professionals/update',
+                'description' => 'Administração de Profossionais - update.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professionals/verifyUserByEmail',
+                'description' => 'Verificar se o profissional existe pelo email.',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/role',
                 'description' => 'Ver cargos',
                 'role_id' => 3,

@@ -6,6 +6,7 @@ use Farol360\Ancora\Controller\Admin\IndexController as IndexAdmin;
 use Farol360\Ancora\Controller\Admin\DiseaseController as DiseaseAdmin;
 use Farol360\Ancora\Controller\Admin\PatientController as PatientAdmin;
 use Farol360\Ancora\Controller\Admin\PermissionController as PermissionAdmin;
+use Farol360\Ancora\Controller\Admin\ProfessionalController as ProfessionalAdmin;
 use Farol360\Ancora\Controller\Admin\RoleController as RoleAdmin;
 use Farol360\Ancora\Controller\Admin\UserController as UserAdmin;
 
@@ -43,6 +44,15 @@ $app->group('/admin', function () {
         $this->get('/delete/{id:[0-9]+}', PermissionAdmin::class . ':delete');
         $this->get('/edit/{id:[0-9]+}', PermissionAdmin::class . ':edit');
         $this->post('/update', PermissionAdmin::class . ':update');
+    });
+
+    $this->group('/professionals', function() {
+        $this->get('[/]', ProfessionalAdmin::class . ':index');
+        $this->map(['GET', 'POST'], '/add', ProfessionalAdmin::class . ':add');
+        $this->get('/remove/{id:[0-9]+}', ProfessionalAdmin::class . ':delete');
+        $this->get('/edit/{id:[0-9]+}', ProfessionalAdmin::class . ':edit');
+        $this->post('/update', ProfessionalAdmin::class . ':update');
+        $this->map(['GET', 'POST'],'/verifyUserByEmail', ProfessionalAdmin::class . ':verifyUserByEmail');
     });
 
     $this->group('/role', function () {
