@@ -53,7 +53,7 @@ class PatientController extends Controller
         $data = $request->getParsedBody();
 
         $data['password'] = '1234';
-        $data['role_id'] = 1;
+        $data['role_id'] = 5;
 
         if ($this->patientModel->getbyEmail($data['email']) != false) {
             $this->flash->addMessage('success', 'O email já existe. por favor cadastre um email único.');
@@ -77,7 +77,13 @@ class PatientController extends Controller
     public function delete(Request $request, Response $response, array $args): Response
     {
         $id = intval($args['id']);
-        $this->patientModel->delete($id);
+        $patient = $this->patientModel->get($id);
+
+        if (isset($patient)) {
+            $this->userModel->delete((int) $patient->id_user);
+            $this->patientModel->delete((int) $patient->id);
+        }
+
 
         $this->flash->addMessage('success', 'Paciente removido com sucesso.');
         return $this->httpRedirect($request, $response, '/admin/patients');

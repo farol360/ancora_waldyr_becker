@@ -30,6 +30,18 @@ class BaseDataMigration extends AbstractMigration
                 'name' => 'user',
                 'description' => 'Cliente',
                 'access_level' => 500
+            ],
+            [
+                'id' => 5,
+                'name' => 'patient',
+                'description' => 'Paciente',
+                'access_level' => 50
+            ],
+            [
+                'id' => 6,
+                'name' => 'professional',
+                'description' => 'Profissionais',
+                'access_level' => 100
             ]
         ];
         $this->insert('roles', $roles);

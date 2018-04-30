@@ -86,9 +86,9 @@ class UserModel extends Model
 
     public function delete(int $userId): bool
     {
-         $sql = "UPDATE users SET deleted = 1 WHERE id = :id";
+         $sql = "DELETE FROM users WHERE id = :id";
         $query = $this->db->prepare($sql);
-        $parameters = [':id' => $id];
+        $parameters = [':id' => $userId];
         return $query->execute($parameters);
     }
 
