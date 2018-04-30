@@ -1,6 +1,6 @@
 # Project F.A.P. Gestão.
 
-A system to manage patients at the Waldyr Becker institution to support the cancer patient.
+A system to manage patients at the Waldyr Becker institution to support patients with cancer diagnostic.
 
 The scope of the system:
 
