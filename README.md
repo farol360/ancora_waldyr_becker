@@ -4,12 +4,12 @@ A system to manage patients at the Waldyr Becker institution to support patients
 
 The scope of the system:
 
-Manage Patients;
-Manage Professionals;
-Manage Inventory;
-Manage Attendance;
-Manage Donations;
-Manage Loans.
+- Manage Patients;
+- Manage Professionals;
+- Manage Inventory;
+- Manage Attendance;
+- Manage Donations;
+- Manage Loans.
 
 ## Made with Ancora.
 

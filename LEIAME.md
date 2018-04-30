@@ -4,12 +4,12 @@ Um sistema para gerenciar pacientes na instituição Waldyr Becker de apoio ao p
 
 O escopo do sistema:
 
-Gerenciar Pacientes;
-Gerenciar Profissionais;
-Gerenciar Estoque;
-Gerenciar Atendimentos;
-Gerenciar Doações;
-Gerenciar Empréstimos.
+- Gerenciar Pacientes;
+- Gerenciar Profissionais;
+- Gerenciar Estoque;
+- Gerenciar Atendimentos;
+- Gerenciar Doações;
+- Gerenciar Empréstimos.
 
 ## Feito com Ancora.
 
