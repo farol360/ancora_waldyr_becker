@@ -55,6 +55,11 @@ class PatientController extends Controller
         $data['password'] = '1234';
         $data['role_id'] = 1;
 
+        if ($this->patientModel->getbyEmail($data['email']) != false) {
+            $this->flash->addMessage('success', 'O email já existe. por favor cadastre um email único.');
+            return $this->httpRedirect($request, $response, '/admin/patients/add');
+        }
+
         $user = $this->entityFactory->createUser($data);
 
         $patient['id_user'] = $this->userModel->add($user);
@@ -81,20 +86,51 @@ class PatientController extends Controller
     public function edit(Request $request, Response $response, array $args): Response
     {
         $id = intval($args['id']);
-        $patient = $this->diseaseModel->get($id);
+        $patient = $this->patientModel->get($id);
         if (!$patient) {
             $this->flash->addMessage('danger', 'Paciente não encontrado.');
             return $this->httpRedirect($request, $response, '/admin/patients');
         }
-        return $this->view->render($response, 'admin/patient/edit.twig', ['patient' => $patient]);
+
+        $diseases = $this->diseaseModel->getAll();
+
+        return $this->view->render($response, 'admin/patient/edit.twig', ['patient' => $patient, 'diseases' => $diseases]);
     }
 
     public function update(Request $request, Response $response): Response
     {
-        $patient = $this->entityFactory->createPatient($request->getParsedBody());
+
+        $data = $request->getParsedBody();
+
+        $user = $this->entityFactory->createUser($data);
+
+        var_dump($user);
+        die;
+
+        $patient['id_user'] = (int) $user->id;
+        $patient['id_patient_type'] = 1;
+        $patient['id_disease'] = $data['id_disease'];
+
+        $patient = $this->entityFactory->createPatient($data);
+
         $this->patientModel->update($patient);
+        $this->userModel->update($user);
 
         $this->flash->addMessage('success', 'Paciente atualizado com sucesso.');
         return $this->httpRedirect($request, $response, '/admin/patients');
+    }
+
+    public function verifyUserByEmail (Request $request, Response $response) {
+        $data = $request->getParsedBody();
+
+        $return = $this->patientModel->getByEmail((string)$data['email']);
+
+        if ($return == false) {
+            return "false";
+        } else {
+            return "true";
+        }
+
+
     }
 }

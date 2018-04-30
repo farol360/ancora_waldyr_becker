@@ -254,7 +254,6 @@ class UserModel extends Model
             ':id' => (int) $user->id,
             ':email' => $user->email,
             ':name' => $user->name,
-            ':password' => $user->password,
             ':role_id' => $user->role_id,
             ':nascimento' => $user->nascimento,
             ':cpf' => $user->cpf,
@@ -270,7 +269,7 @@ class UserModel extends Model
 
         ];
         if (!empty($password)) {
-            $parameters[':password'] = password_hash($password, PASSWORD_DEFAULT);
+            $parameters[':password'] = password_hash($user->password, PASSWORD_DEFAULT);
         }
         return $query->execute($parameters);
     }

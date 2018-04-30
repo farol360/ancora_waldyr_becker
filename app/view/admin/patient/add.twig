@@ -35,6 +35,40 @@
               <div class="form-group">
                 <label for="inputEmail">Email</label>
                 <input type="email" class="form-control" id="inputEmail" name="email" placeholder="" required>
+                <p id="email-error" style="color:red;"></p>
+                <script type="text/javascript">
+                  $('#inputEmail').change(function(){
+                    if ($(this).parent().hasClass('has-error')) {
+
+                      $('#email-error').css('color', 'red');
+                      $('#email-error').html('Utilize um email válido.');
+                    } else {
+                      //var data = "{email: "++"}";
+                      $.ajax({
+                        url:'{{ base_url() }}/admin/patients/verifyUserByEmail',
+                        type: "POST",
+                        data: {email: $('#inputEmail').val()},
+                        success: function (data) {
+                          console.log(data);
+
+                          if (data == "true") {
+
+                            $('#email-error').css('color', 'red');
+                            $('#email-error').html('o email já está cadastrado.');
+                          } else if (data == "false") {
+
+                            $('#email-error').css('color', 'green');
+                            $('#email-error').html('email liberado para cadastro.');
+                          }
+                        },
+                        error: function (data) {
+                          console.error(data);
+                        }
+
+                      });
+                    }
+                  });
+                </script>
               </div>
             </div>
           </div>

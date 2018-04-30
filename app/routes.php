@@ -34,6 +34,7 @@ $app->group('/admin', function () {
         $this->get('/remove/{id:[0-9]+}', PatientAdmin::class . ':delete');
         $this->get('/edit/{id:[0-9]+}', PatientAdmin::class . ':edit');
         $this->post('/update', PatientAdmin::class . ':update');
+        $this->map(['GET', 'POST'],'/verifyUserByEmail', PatientAdmin::class . ':verifyUserByEmail');
     });
 
     $this->group('/permission', function () {

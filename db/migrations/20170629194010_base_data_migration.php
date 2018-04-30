@@ -111,6 +111,11 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 2,
             ],
             [
+                'resource' => '/admin/patients/verifyUserByEmail',
+                'description' => 'Verificar se o usuário existe pelo email.',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/permission',
                 'description' => 'Ver permissões',
                 'role_id' => 3,

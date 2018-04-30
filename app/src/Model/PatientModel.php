@@ -44,9 +44,9 @@ class PatientModel extends Model
     {
         $sql = "
             SELECT
+                users.*,
                 patients.*,
-                users.*,
-                users.*,
+                diseases.id as disease_id,
                 diseases.name as disease_name,
                 diseases.description as disease_description,
                 diseases.cid_version as disease_cid_version,
@@ -55,7 +55,7 @@ class PatientModel extends Model
                 patients LEFT JOIN users ON users.id = patients.id_user
             LEFT JOIN diseases ON patients.id_disease = diseases.id
             WHERE
-                id = :id
+                patients.id = :id
             LIMIT 1
         ";
         $query = $this->db->prepare($sql);
@@ -65,13 +65,36 @@ class PatientModel extends Model
         return $query->fetch();
     }
 
+    public function getByEmail(string $email) {
+        $sql = "
+            SELECT
+                users.*,
+                patients.*,
+                diseases.id as disease_id,
+                diseases.name as disease_name,
+                diseases.description as disease_description,
+                diseases.cid_version as disease_cid_version,
+                diseases.cid_code as diseases_cid_code
+            FROM
+                patients LEFT JOIN users ON users.id = patients.id_user
+            LEFT JOIN diseases ON patients.id_disease = diseases.id
+            WHERE
+                users.email = :email
+            LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $parameters = [':email' => $email];
+        $query->execute($parameters);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Patient::class);
+        return $query->fetch();
+    }
+
     public function getAll(): array
     {
         $sql = "
             SELECT
+                users.*,
                 patients.*,
-                users.*,
-                users.*,
+                diseases.id as disease_id,
                 diseases.name as disease_name,
                 diseases.description as disease_description,
                 diseases.cid_version as disease_cid_version,

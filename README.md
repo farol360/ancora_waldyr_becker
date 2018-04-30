@@ -1,4 +1,17 @@
-# Ancora - just a PHP way to construct web apps.
+# Project F.A.P. Gestão.
+
+A system to manage patients at the Waldyr Becker institution to support the cancer patient.
+
+The scope of the system:
+
+Manage Patients;
+Manage Professionals;
+Manage Inventory;
+Manage Attendance;
+Manage Donations;
+Manage Loans.
+
+## Made with Ancora.
 
 This is a tool built by [Maurício Fauth](https://github.com/mauriciofauth) and [Thiago Nardi](https://github.com/thnardi) to develop web apps. We have working on this since 2017 in [Farol 360](https://farol360.com.br) jobs.
 
@@ -23,7 +36,7 @@ We create a [guide](https://github.com/thnardi/ancora/blob/master/GUIDE.md) to h
 
 1) Clone or download the repo files
 ```
-git clone https://github.com/thnardi/ancora.git
+git clone git@github.com:farol360/ancora_waldyr_becker.git
 ```
 2) run composer on project folder to install dependencies
 ```
@@ -43,7 +56,12 @@ vendor/bin/phinx migrate
 ```
 php -S localhost:8080 -t public_html/
 ```
-## Authors
+## Project Members
+
+- **Thiago Nardi** - *Project Manager, programmer*
+- **Pedro Henrique** - *Trainee*
+
+## Authors of Ancora
 
 - **Maurício Fauth** - *Initial work*
 - **Thiago Nardi**
