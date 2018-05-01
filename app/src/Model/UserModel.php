@@ -225,27 +225,78 @@ class UserModel extends Model
                 users
             SET
         ";
-        if (!empty($password)) {
+        if (!empty($user->password)) {
             $sql .= "
                 password = :password,
             ";
         }
-        $sql .= "
-                email = :email,
+        if (!empty($user->name)) {
+            $sql .= "
                 name = :name,
+            ";
+        }
+        if (!empty($user->nascimento)) {
+            $sql .= "
                 nascimento = :nascimento,
+            ";
+        }
+        if (!empty($user->cpf)) {
+            $sql .= "
                 cpf = :cpf,
+            ";
+        }
+        if (!empty($user->tel_area)) {
+            $sql .= "
                 tel_area = :tel_area,
+            ";
+        }
+        if (!empty($user->tel_numero)) {
+            $sql .= "
                 tel_numero = :tel_numero,
+            ";
+        }
+        if (!empty($user->end_rua)) {
+            $sql .= "
                 end_rua = :end_rua,
+            ";
+        }
+        if (!empty($user->end_numero)) {
+            $sql .= "
                 end_numero = :end_numero,
+            ";
+        }
+        if (!empty($user->end_complemento)) {
+            $sql .= "
                 end_complemento = :end_complemento,
+            ";
+        }
+        if (!empty($user->end_bairro)) {
+            $sql .= "
                 end_bairro = :end_bairro,
+            ";
+        }
+        if (!empty($user->end_cidade)) {
+            $sql .= "
                 end_cidade = :end_cidade,
+            ";
+        }
+        if (!empty($user->end_estado)) {
+            $sql .= "
                 end_estado = :end_estado,
+            ";
+        }
+        if (!empty($user->end_cep)) {
+            $sql .= "
                 end_cep = :end_cep,
-                role_id = :role_id
-
+            ";
+        }
+        if (!empty($user->role_id)) {
+            $sql .= "
+                role_id = :role_id,
+            ";
+        }
+        $sql .= "
+                email = :email
             WHERE
                 id = :id
         ";
@@ -253,24 +304,50 @@ class UserModel extends Model
         $parameters = [
             ':id' => (int) $user->id,
             ':email' => $user->email,
-            ':name' => $user->name,
-            ':role_id' => $user->role_id,
-            ':nascimento' => $user->nascimento,
-            ':cpf' => $user->cpf,
-            ':tel_area' => $user->tel_area,
-            ':tel_numero' => $user->tel_numero,
-            ':end_rua' => $user->end_rua,
-            ':end_numero' => $user->end_numero,
-            ':end_complemento' => $user->endComplemento,
-            ':end_bairro' => $user->end_bairro,
-            ':end_cidade' => $user->end_cidade,
-            ':end_estado' => $user->end_estado,
-            ':end_cep' => $user->end_cep
-
         ];
-        if (!empty($password)) {
+        if (!empty($user->password)) {
             $parameters[':password'] = password_hash($user->password, PASSWORD_DEFAULT);
         }
+        if (!empty($user->name)) {
+            $parameters[':name'] = $user->name;
+        }
+        if (!empty($user->nascimento)) {
+            $parameters[':nascimento'] = $user->nascimento;
+        }
+        if (!empty($user->cpf)) {
+            $parameters[':cpf'] = $user->cpf;
+        }
+        if (!empty($user->tel_area)) {
+            $parameters[':tel_area'] = $user->tel_area;
+        }
+        if (!empty($user->tel_numero)) {
+            $parameters[':tel_numero'] = $user->tel_numero;
+        }
+        if (!empty($user->end_rua)) {
+            $parameters[':end_rua'] = $user->end_rua;
+        }
+        if (!empty($user->end_numero)) {
+            $parameters[':end_numero'] = $user->end_numero;
+        }
+        if (!empty($user->end_complemento)) {
+            $parameters[':end_complemento'] = $user->end_complemento;
+        }
+        if (!empty($user->end_bairro)) {
+            $parameters[':end_bairro'] = $user->end_bairro;
+        }
+        if (!empty($user->end_cidade)) {
+            $parameters[':end_cidade'] = $user->end_cidade;
+        }
+        if (!empty($user->end_estado)) {
+            $parameters[':end_estado'] = $user->end_estado;
+        }
+        if (!empty($user->end_cep)) {
+            $parameters[':end_cep'] = $user->end_cep;
+        }
+        if (!empty($user->role_id)) {
+            $parameters[':role_id'] = $user->role_id;
+        }
+
         return $query->execute($parameters);
     }
 

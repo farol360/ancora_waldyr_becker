@@ -52,7 +52,7 @@ class ProfessionalController extends Controller
 
         $data = $request->getParsedBody();
 
-        $data['password'] = '1234';
+        $data['password'] = 'Ancora1337';
         $data['role_id'] = 6;
 
         if ($this->professionalModel->getByEmail($data['email']) != false) {
@@ -78,6 +78,8 @@ class ProfessionalController extends Controller
     {
         $id = intval($args['id']);
         $professional = $this->professionalModel->get($id);
+
+        $professional = $this->entityFactory->createProfessional($professional);
 
         if (isset($professional)) {
             $this->userModel->delete((int) $professional->id_user);
@@ -107,16 +109,22 @@ class ProfessionalController extends Controller
 
         $data = $request->getParsedBody();
 
-        $user = $this->entityFactory->createUser($data);
+        var_dump($data);
 
-        $professional['id_user'] = (int) $user->id;
-        $professional['id_professional_type'] = 1;
-        $professional['id_disease'] = $data['id_disease'];
+        $professional['id'] = (int) $data['id'];
+        $professional['id_user'] = (int) $data['id_user'];
+        $professional['id_professional_type'] = (int) $data['id_professional_type'];
+        $professional = $this->entityFactory->createprofessional($professional);
 
-        $professional = $this->entityFactory->createprofessional($data);
+        $user = $data;
+        $user['id'] = (int) $data['id_user'];
+
+        $user_old = (array) $this->userModel->get($user['id']);
+        $user_new = $user_old =  $user;
+        $user_new = $this->entityFactory->createUser($user_new);
 
         $this->professionalModel->update($professional);
-        $this->userModel->update($user);
+        $this->userModel->update($user_new);
 
         $this->flash->addMessage('success', 'Professional atualizado com sucesso.');
         return $this->httpRedirect($request, $response, '/admin/professionals');

@@ -41,9 +41,8 @@ class ProfessionalModel extends Model
     {
         $sql = "
             SELECT
-                professionals.*,
-                users.*
-
+                users.*,
+                professionals.*
             FROM
                 professionals LEFT JOIN users ON users.id = professionals.id_user
 

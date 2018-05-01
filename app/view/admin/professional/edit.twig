@@ -29,6 +29,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <input type="hidden" name="id" value="{{ professional.id }}">
+                <input type="hidden" name="id_user" value="{{ professional.id_user }}">
                 <label for="inputName">Nome</label>
                 <input type="text" class="form-control" id="inputName" name="name" placeholder="" value="{{ professional.name }}" required>
               </div>
@@ -147,33 +148,33 @@
               <label for="selectEstado">Estado</label>
               <select class="form-control" id="selectEstado" name="end_estado" value="{{ professional.end_estado }}">
 
-                <option value="AC" {% if patient.end_estado == 'AC' %} selected {% endif %}>Acre</option>
-                <option value="AL" {% if patient.end_estado == 'AL' %} selected {% endif %}>Alagoas</option>
-                <option value="AP" {% if patient.end_estado == 'AP' %} selected {% endif %}>Amapá</option>
-                <option value="AM" {% if patient.end_estado == 'AM' %} selected {% endif %}>Amazonas</option>
-                <option value="BA" {% if patient.end_estado == 'BA' %} selected {% endif %}>Bahia</option>
-                <option value="CE" {% if patient.end_estado == 'CE' %} selected {% endif %}>Ceará</option>
-                <option value="DF" {% if patient.end_estado == 'DF' %} selected {% endif %}>Distrito Federal</option>
-                <option value="ES" {% if patient.end_estado == 'ES' %} selected {% endif %}>Espírito Santo</option>
-                <option value="GO" {% if patient.end_estado == 'GO' %} selected {% endif %}>Goiás</option>
-                <option value="MA" {% if patient.end_estado == 'MA' %} selected {% endif %}>Maranhão</option>
-                <option value="MT" {% if patient.end_estado == 'MT' %} selected {% endif %}>Mato Grosso</option>
-                <option value="MS" {% if patient.end_estado == 'MS' %} selected {% endif %}>Mato Grosso do Sul</option>
-                <option value="MG" {% if patient.end_estado == 'MG' %} selected {% endif %}>Minas Gerais</option>
-                <option value="PA" {% if patient.end_estado == 'PA' %} selected {% endif %}>Pará</option>
-                <option value="PB" {% if patient.end_estado == 'PB' %} selected {% endif %}>Paraíba</option>
-                <option value="PR" {% if patient.end_estado == 'PR' %} selected {% endif %}>Paraná</option>
-                <option value="PE" {% if patient.end_estado == 'PE' %} selected {% endif %}>Pernambuco</option>
-                <option value="PI" {% if patient.end_estado == 'PI' %} selected {% endif %}>Piauí</option>
-                <option value="RJ" {% if patient.end_estado == 'RJ' %} selected {% endif %}>Rio de Janeiro</option>
-                <option value="RN" {% if patient.end_estado == 'RN' %} selected {% endif %}>Rio Grande do Norte</option>
-                <option value="RS" {% if patient.end_estado == 'RS' %} selected {% endif %}>Rio Grande do Sul</option>
-                <option value="RO" {% if patient.end_estado == 'RO' %} selected {% endif %}>Rondônia</option>
-                <option value="RR" {% if patient.end_estado == 'RR' %} selected {% endif %}>Roraima</option>
-                <option value="SC" {% if patient.end_estado == 'SC' %} selected {% endif %}>Santa Catarina</option>
-                <option value="SP" {% if patient.end_estado == 'SP' %} selected {% endif %}>São Paulo</option>
-                <option value="SE" {% if patient.end_estado == 'SE' %} selected {% endif %}>Sergipe</option>
-                <option value="TO" {% if patient.end_estado == 'TO' %} selected {% endif %}>Tocantins</option>
+                <option value="AC" {% if professional.end_estado == 'AC' %} selected {% endif %}>Acre</option>
+                <option value="AL" {% if professional.end_estado == 'AL' %} selected {% endif %}>Alagoas</option>
+                <option value="AP" {% if professional.end_estado == 'AP' %} selected {% endif %}>Amapá</option>
+                <option value="AM" {% if professional.end_estado == 'AM' %} selected {% endif %}>Amazonas</option>
+                <option value="BA" {% if professional.end_estado == 'BA' %} selected {% endif %}>Bahia</option>
+                <option value="CE" {% if professional.end_estado == 'CE' %} selected {% endif %}>Ceará</option>
+                <option value="DF" {% if professional.end_estado == 'DF' %} selected {% endif %}>Distrito Federal</option>
+                <option value="ES" {% if professional.end_estado == 'ES' %} selected {% endif %}>Espírito Santo</option>
+                <option value="GO" {% if professional.end_estado == 'GO' %} selected {% endif %}>Goiás</option>
+                <option value="MA" {% if professional.end_estado == 'MA' %} selected {% endif %}>Maranhão</option>
+                <option value="MT" {% if professional.end_estado == 'MT' %} selected {% endif %}>Mato Grosso</option>
+                <option value="MS" {% if professional.end_estado == 'MS' %} selected {% endif %}>Mato Grosso do Sul</option>
+                <option value="MG" {% if professional.end_estado == 'MG' %} selected {% endif %}>Minas Gerais</option>
+                <option value="PA" {% if professional.end_estado == 'PA' %} selected {% endif %}>Pará</option>
+                <option value="PB" {% if professional.end_estado == 'PB' %} selected {% endif %}>Paraíba</option>
+                <option value="PR" {% if professional.end_estado == 'PR' %} selected {% endif %}>Paraná</option>
+                <option value="PE" {% if professional.end_estado == 'PE' %} selected {% endif %}>Pernambuco</option>
+                <option value="PI" {% if professional.end_estado == 'PI' %} selected {% endif %}>Piauí</option>
+                <option value="RJ" {% if professional.end_estado == 'RJ' %} selected {% endif %}>Rio de Janeiro</option>
+                <option value="RN" {% if professional.end_estado == 'RN' %} selected {% endif %}>Rio Grande do Norte</option>
+                <option value="RS" {% if professional.end_estado == 'RS' %} selected {% endif %}>Rio Grande do Sul</option>
+                <option value="RO" {% if professional.end_estado == 'RO' %} selected {% endif %}>Rondônia</option>
+                <option value="RR" {% if professional.end_estado == 'RR' %} selected {% endif %}>Roraima</option>
+                <option value="SC" {% if professional.end_estado == 'SC' %} selected {% endif %}>Santa Catarina</option>
+                <option value="SP" {% if professional.end_estado == 'SP' %} selected {% endif %}>São Paulo</option>
+                <option value="SE" {% if professional.end_estado == 'SE' %} selected {% endif %}>Sergipe</option>
+                <option value="TO" {% if professional.end_estado == 'TO' %} selected {% endif %}>Tocantins</option>
               </select>
             </div>
           </div>
@@ -184,8 +185,8 @@
 
           </div>
           <div class="form-group">
-            <label for="selectDisease">Doença</label>
-            <select class="form-control" id="selectDisease" name="id_disease">
+            <label for="selectDisease">Cargo Profissional</label>
+            <select class="form-control" id="selectDisease" name="id_professional_type">
               {% for professional_type in professional_types %}
                 {% if professional_type.id == professional.id_professional_type %}
                   <option value="{{ professional_type.id }}" selected>{{ professional_type.name }}</option>
