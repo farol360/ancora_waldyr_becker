@@ -35,6 +35,7 @@ $app->group('/admin', function () {
         $this->map(['GET', 'POST'], '/add', PatientAdmin::class . ':add');
         $this->get('/remove/{id:[0-9]+}', PatientAdmin::class . ':delete');
         $this->get('/edit/{id:[0-9]+}', PatientAdmin::class . ':edit');
+        $this->map(['GET', 'POST'], '/history/{id:[0-9]+}', ProfessionalAdmin::class . ':history');
         $this->post('/update', PatientAdmin::class . ':update');
         $this->map(['GET', 'POST'],'/verifyUserByEmail', PatientAdmin::class . ':verifyUserByEmail');
     });
@@ -52,6 +53,7 @@ $app->group('/admin', function () {
         $this->map(['GET', 'POST'], '/add', ProfessionalAdmin::class . ':add');
         $this->get('/remove/{id:[0-9]+}', ProfessionalAdmin::class . ':delete');
         $this->get('/edit/{id:[0-9]+}', ProfessionalAdmin::class . ':edit');
+        $this->map(['GET', 'POST'], '/history/{id:[0-9]+}', ProfessionalAdmin::class . ':history');
         $this->post('/update', ProfessionalAdmin::class . ':update');
         $this->map(['GET', 'POST'],'/verifyUserByEmail', ProfessionalAdmin::class . ':verifyUserByEmail');
     });

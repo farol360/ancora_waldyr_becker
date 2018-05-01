@@ -108,13 +108,18 @@ class PatientController extends Controller
 
         $data = $request->getParsedBody();
 
-        $user = $this->entityFactory->createUser($data);
-
-        $patient['id_user'] = (int) $user->id;
+        $patient['id'] = (int) $data['id'];
+        $patient['id_user'] = (int) $data['id_user'];
         $patient['id_patient_type'] = 1;
         $patient['id_disease'] = $data['id_disease'];
 
-        $patient = $this->entityFactory->createPatient($data);
+        $patient = $this->entityFactory->createPatient($patient);
+
+        $user = $data;
+        $user['id'] = $data['id_user'];
+
+        $user = $this->entityFactory->createUser($user);
+
 
         $this->patientModel->update($patient);
         $this->userModel->update($user);
@@ -125,6 +130,7 @@ class PatientController extends Controller
 
     public function verifyUserByEmail (Request $request, Response $response) {
         $data = $request->getParsedBody();
+
 
         $return = $this->patientModel->getByEmail((string)$data['email']);
 
