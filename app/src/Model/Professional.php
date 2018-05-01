@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Farol360\Ancora\Model;
 
-class Patient
+class Professional
 {
     public $id;
     public $id_user;
     public $id_professional_type;
-    public
+
 
     public function __construct(array $data = [])
     {

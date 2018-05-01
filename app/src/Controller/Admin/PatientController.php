@@ -55,7 +55,7 @@ class PatientController extends Controller
         $data['password'] = '1234';
         $data['role_id'] = 5;
 
-        if ($this->patientModel->getbyEmail($data['email']) != false) {
+        if ($this->patientModel->getByEmail($data['email']) != false) {
             $this->flash->addMessage('success', 'O email já existe. por favor cadastre um email único.');
             return $this->httpRedirect($request, $response, '/admin/patients/add');
         }
@@ -109,9 +109,6 @@ class PatientController extends Controller
         $data = $request->getParsedBody();
 
         $user = $this->entityFactory->createUser($data);
-
-        var_dump($user);
-        die;
 
         $patient['id_user'] = (int) $user->id;
         $patient['id_patient_type'] = 1;

@@ -67,7 +67,7 @@ class UserModel extends Model
             ':tel_numero' => $user->tel_numero,
             ':end_rua' => $user->end_rua,
             ':end_numero' => $user->end_numero,
-            ':end_complemento' => $user->endComplemento,
+            ':end_complemento' => $user->end_complemento,
             ':end_bairro' => $user->end_bairro,
             ':end_cidade' => $user->end_cidade,
             ':end_estado' => $user->end_estado,

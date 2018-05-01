@@ -327,6 +327,14 @@ class BaseDataMigration extends AbstractMigration
                 'password' => $password,
                 'role_id' => 2,
                 'active' => 1,
+            ],
+            [
+                'id' => 3,
+                'email' => 'admin@fapcancer.com.br',
+                'name' => 'Administrador',
+                'password' => $password,
+                'role_id' => 2,
+                'active' => 1,
             ]
         ];
         $this->insert('users', $users);
