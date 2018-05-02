@@ -159,11 +159,24 @@ class PatientController extends Controller
         $user = $this->entityFactory->createUser($user);
 
 
-        $this->patientModel->update($patient);
-        $this->userModel->update($user);
+        $patient_return = $this->patientModel->update($patient);
+        $user_return = $this->userModel->update($user);
 
-        $this->flash->addMessage('success', 'Paciente atualizado com sucesso.');
-        return $this->httpRedirect($request, $response, '/admin/patients');
+        // if it's all ok with updates, create event log
+        if ( (($patient_return != null) || ($patient_return != false)) && ($user_return != null) || ($user_return != false)  ) {
+
+            $eventLog['id_patient']         = $patient->id;
+            $eventLog['id_event_log_type']  = $this->eventLogTypeModel->getBySlug('edit_patient')->id;
+            $eventLog['description'] = 'Paciente ' . $user->name .' atualizado';
+
+            $eventLog = $this->entityFactory->createEventLog($eventLog);
+            $this->eventLogModel->add($eventLog);
+
+            $this->flash->addMessage('success', 'Paciente atualizado com sucesso.');
+            return $this->httpRedirect($request, $response, '/admin/patients');
+        }
+
+
     }
 
     public function verifyUserByEmail (Request $request, Response $response) {
