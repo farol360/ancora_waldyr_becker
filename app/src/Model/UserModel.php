@@ -30,7 +30,6 @@ class UserModel extends Model
                 role_id,
                 active,
                 deleted,
-                created_at,
                 updated_at
             )
             VALUES (
@@ -51,7 +50,6 @@ class UserModel extends Model
                 :role_id,
                 :active,
                 :deleted,
-                :created_at,
                 :updated_at
             )
         ";
@@ -74,7 +72,6 @@ class UserModel extends Model
             ':end_cep' => $user->end_cep,
             ':active' => 1,
             ':deleted' => 0,
-            ':created_at' => time(),
             ':updated_at' => null
         ];
         if ($query->execute($parameters)) {
@@ -295,15 +292,20 @@ class UserModel extends Model
                 role_id = :role_id,
             ";
         }
+        if (!empty($user->email)) {
+            $sql .= "
+                email = :email,
+            ";
+        }
         $sql .= "
-                email = :email
+                updated_at = :updated_at
             WHERE
                 id = :id
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
             ':id' => (int) $user->id,
-            ':email' => $user->email,
+            ':updated_at' => date("Y-m-d H:i:s"),
         ];
         if (!empty($user->password)) {
             $parameters[':password'] = password_hash($user->password, PASSWORD_DEFAULT);
@@ -346,6 +348,9 @@ class UserModel extends Model
         }
         if (!empty($user->role_id)) {
             $parameters[':role_id'] = $user->role_id;
+        }
+        if (!empty($user->email)) {
+            $parameters[':email'] = $user->email;
         }
 
         return $query->execute($parameters);
