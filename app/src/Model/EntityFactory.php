@@ -5,6 +5,7 @@ namespace Farol360\Ancora\Model;
 
 // business objects
 use Farol360\Ancora\Model\Disease;
+use Farol360\Ancora\Model\Event;
 use Farol360\Ancora\Model\Patient;
 use Farol360\Ancora\Model\PatientType;
 use Farol360\Ancora\Model\Professional;
@@ -22,6 +23,11 @@ class EntityFactory
     public function createDisease(array $data = []): Disease
     {
         return new Disease($data);
+    }
+
+    public function createEvent(array $data = []): Event
+    {
+        return new Event($data);
     }
 
     public function createPatient(array $data = []): Patient
