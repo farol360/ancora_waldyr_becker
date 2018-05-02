@@ -134,7 +134,11 @@ class PatientController extends Controller
         $id = intval($args['id']);
         $patient = $this->patientModel->get($id);
 
-        return $this->view->render($response, 'admin/patient/history.twig', ['patient' => $patient]);
+
+        $event_logs = $this->eventLogModel->getByPatient($id);
+
+        return $this->view->render($response, 'admin/patient/history.twig', ['patient' => $patient,
+            'event_logs' => $event_logs]);
     }
 
     public function update(Request $request, Response $response): Response

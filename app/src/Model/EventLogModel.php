@@ -86,6 +86,76 @@ class EventLogModel extends Model
         return $query->fetchAll();
     }
 
+    public function getByPatient(int $id)
+    {
+        $sql = "
+            SELECT
+                event_logs.id as id,
+                event_logs.id_event_log_type,
+                event_logs.id_patient,
+                event_logs.id_professional,
+                event_logs.date,
+                event_logs.description,
+                event_log_types.id as event_log_types_id,
+                event_log_types.slug as event_log_types_slug,
+                event_log_types.name as event_log_types_name,
+                event_log_types.description as event_log_types_description,
+                patients.id as patients_id,
+                patients.id_user as patients_id_user,
+                users.name as users_name,
+                users.email as users_email
+
+            FROM
+                event_logs
+                LEFT JOIN event_log_types ON event_logs.id_event_log_type = event_log_types.id
+                LEFT JOIN patients ON patients.id = event_logs.id_patient
+                LEFT JOIN users ON patients.id_user = users.id
+            WHERE
+                id_patient = :id
+
+        ";
+        $query = $this->db->prepare($sql);
+        $parameters = [':id' => $id];
+        $query->execute($parameters);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, EventLog::class);
+        return $query->fetchAll();
+    }
+
+    public function getByProfessional(int $id)
+    {
+        $sql = "
+            SELECT
+                event_logs.id as id,
+                event_logs.id_event_log_type,
+                event_logs.id_patient,
+                event_logs.id_professional,
+                event_logs.date,
+                event_logs.description,
+                event_log_types.id,
+                event_log_types.slug,
+                event_log_types.name,
+                event_log_types.description,
+                professionals.id,
+                professionals.id_user,
+                users.name,
+                users.email
+
+            FROM
+                event_logs
+                LEFT JOIN event_log_types ON event_logs.id_event_log_type = event_log_types.id
+                LEFT JOIN professionals ON professionals.id = event_logs.id_professional
+                LEFT JOIN users ON professionals.id_user = users.id
+            WHERE
+                id_professional = :id
+            LIMIT 1
+        ";
+        $query = $this->db->prepare($sql);
+        $parameters = [':id' => $id];
+        $query->execute($parameters);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, EventLog::class);
+        return $query->fetch();
+    }
+
     public function update(EventLog $eventLog): bool
     {
         $sql = "
