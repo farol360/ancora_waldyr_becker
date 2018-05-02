@@ -104,8 +104,11 @@ class ProfessionalController extends Controller
         return $this->view->render($response, 'admin/professional/edit.twig', ['professional' => $professional, 'professional_types' => $professional_types]);
     }
 
-    public function history(Request $request, Response $response): Response {
-        return $this->view->render($response, 'admin/professional/history.twig');
+    public function history(Request $request, Response $response, array $args): Response {
+        $id = intval($args['id']);
+        $professional = $this->professionalModel->get($id);
+
+        return $this->view->render($response, 'admin/professional/history.twig', ['professional' => $professional]);
     }
 
     public function update(Request $request, Response $response): Response

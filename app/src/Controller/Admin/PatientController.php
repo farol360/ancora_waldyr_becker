@@ -103,6 +103,14 @@ class PatientController extends Controller
         return $this->view->render($response, 'admin/patient/edit.twig', ['patient' => $patient, 'diseases' => $diseases]);
     }
 
+    public function history (Request $request, Response $response, array $args)
+    {
+        $id = intval($args['id']);
+        $patient = $this->patientModel->get($id);
+
+        return $this->view->render($response, 'admin/patient/history.twig', ['patient' => $patient]);
+    }
+
     public function update(Request $request, Response $response): Response
     {
 

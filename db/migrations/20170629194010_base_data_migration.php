@@ -113,6 +113,11 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 2,
             ],
             [
+                'resource' => '/admin/patients/history/:id',
+                'description' => 'Histórico de Eventos do Paciente.',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/patients/remove/:id',
                 'description' => 'Administração de Pacientes - Remove.',
                 'role_id' => 2,
@@ -165,6 +170,11 @@ class BaseDataMigration extends AbstractMigration
             [
                 'resource' => '/admin/professionals/edit/:id',
                 'description' => 'Administração de Profossionais - Edit.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/professionals/history/:id',
+                'description' => 'Histórico de eventos do profissional.',
                 'role_id' => 2,
             ],
             [
