@@ -20,6 +20,8 @@ class PatientController extends Controller
     protected $patientModel;
     protected $diseaseModel;
     protected $userModel;
+    protected $eventLogModel;
+    protected $eventLogTypeModel;
 
     public function __construct(
         View $view,
@@ -27,13 +29,17 @@ class PatientController extends Controller
         Model $patientModel,
         Model $diseaseModel,
         Model $userModel,
+        Model $eventLogModel,
+        Model $eventLogTypeModel,
         EntityFactory $entityFactory
     ) {
         parent::__construct($view, $flash);
-        $this->patientModel = $patientModel;
-        $this->diseaseModel = $diseaseModel;
-        $this->userModel    = $userModel;
-        $this->entityFactory = $entityFactory;
+        $this->patientModel         = $patientModel;
+        $this->diseaseModel         = $diseaseModel;
+        $this->userModel            = $userModel;
+        $this->eventLogModel        = $eventLogModel;
+        $this->eventLogTypeModel    = $eventLogTypeModel;
+        $this->entityFactory        = $entityFactory;
     }
 
     public function index(Request $request, Response $response): Response
@@ -52,9 +58,11 @@ class PatientController extends Controller
 
         $data = $request->getParsedBody();
 
+        // set manual data. change this on the future.
         $data['password'] = '1234';
         $data['role_id'] = 5;
 
+        // verify email
         if ($this->patientModel->getByEmail($data['email']) != false) {
             $this->flash->addMessage('success', 'O email já existe. por favor cadastre um email único.');
             return $this->httpRedirect($request, $response, '/admin/patients/add');
@@ -62,16 +70,34 @@ class PatientController extends Controller
 
         $user = $this->entityFactory->createUser($data);
 
+        // add new user
         $patient['id_user'] = $this->userModel->add($user);
+
+        // set patient type manual;
         $patient['id_patient_type'] = 1;
+
+        // set disease
         $patient['id_disease'] = (int) $data['id_disease'];
 
         $patient = $this->entityFactory->createPatient($patient);
 
-        $this->patientModel->add($patient);
+        $id_patient = $this->patientModel->add($patient);
 
-        $this->flash->addMessage('success', 'Paciente adicionado com sucesso.');
-        return $this->httpRedirect($request, $response, '/admin/patients');
+        // create eventLog when add patient
+        if ( ($id_patient != null) || ($id_patient != false) )
+        {
+            $eventLog['id_patient']         = $id_patient;
+            $eventLog['id_event_log_type']  = $this->eventLogTypeModel->getBySlug('create_patient')->id;
+            $eventLog['description'] = 'Paciente ' . $user->name .' cadastrado';
+
+            $eventLog = $this->entityFactory->createEventLog($eventLog);
+            $this->eventLogModel->add($eventLog);
+
+            $this->flash->addMessage('success', 'Paciente adicionado com sucesso.');
+            return $this->httpRedirect($request, $response, '/admin/patients');
+        }
+
+
     }
 
     public function delete(Request $request, Response $response, array $args): Response

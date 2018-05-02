@@ -48,13 +48,31 @@ class EventLogTypeModel extends Model
             SELECT
                 *
             FROM
-                event_logs
+                event_log_types
             WHERE
                 id = :id
             LIMIT 1
         ";
         $query = $this->db->prepare($sql);
         $parameters = [':id' => $id];
+        $query->execute($parameters);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, EventLogType::class);
+        return $query->fetch();
+    }
+
+    public function getBySlug(string $slug)
+    {
+        $sql = "
+            SELECT
+                *
+            FROM
+                event_log_types
+            WHERE
+                slug = :slug
+            LIMIT 1
+        ";
+        $query = $this->db->prepare($sql);
+        $parameters = [':slug' => $slug];
         $query->execute($parameters);
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, EventLogType::class);
         return $query->fetch();
