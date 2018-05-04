@@ -73,6 +73,31 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 2,
             ],
             [
+                'resource' => '/admin/attendances',
+                'description' => 'Administração de Atendimentos.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/attendances/add',
+                'description' => 'Administração de Atendimentos - add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/attendances/edit/:id',
+                'description' => 'Administração de Atendimentos - edit.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/attendances/update',
+                'description' => 'Administração de Atendimentos - edit.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/attendances/remove/:id',
+                'description' => 'Administração de Atendimentos - remover.',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/diseases',
                 'description' => 'Administração de Doenças.',
                 'role_id' => 2,

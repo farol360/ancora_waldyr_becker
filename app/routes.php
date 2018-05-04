@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 // includes
 use Farol360\Ancora\Controller\Admin\IndexController as IndexAdmin;
+use Farol360\Ancora\Controller\Admin\AttendanceController as AttendanceAdmin;
 use Farol360\Ancora\Controller\Admin\DiseaseController as DiseaseAdmin;
 use Farol360\Ancora\Controller\Admin\PatientController as PatientAdmin;
 use Farol360\Ancora\Controller\Admin\PermissionController as PermissionAdmin;
@@ -21,6 +22,14 @@ $app->get('[/]', Page::class . ':index');
 
 $app->group('/admin', function () {
     $this->get('[/]', IndexAdmin::class . ':index');
+
+    $this->group('/attendances', function() {
+        $this->get('[/]', AttendanceAdmin::class . ':index');
+        $this->map(['GET', 'POST'], '/add', AttendanceAdmin::class . ':add');
+        $this->get('/remove/{id:[0-9]+}', AttendanceAdmin::class . ':delete');
+        $this->get('/edit/{id:[0-9]+}', AttendanceAdmin::class . ':edit');
+        $this->post('/update', AttendanceAdmin::class . ':update');
+    });
 
     $this->group('/diseases', function() {
         $this->get('[/]', DiseaseAdmin::class . ':index');

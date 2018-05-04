@@ -13,28 +13,32 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 
-class PatientController extends Controller
+class AttendanceController extends Controller
 {
 
+    protected $attendanceModel;
     protected $patientModel;
-    protected $diseaseModel;
+    protected $professionalModel;
     protected $userModel;
     protected $eventLogModel;
     protected $eventLogTypeModel;
+    protected $entityFactory;
 
     public function __construct(
         View $view,
         FlashMessages $flash,
+        Model $attendanceModel,
         Model $patientModel,
-        Model $diseaseModel,
+        Model $professionalModel,
         Model $userModel,
         Model $eventLogModel,
         Model $eventLogTypeModel,
         EntityFactory $entityFactory
     ) {
         parent::__construct($view, $flash);
+        $this->attendanceModel      = $attendanceModel;
         $this->patientModel         = $patientModel;
-        $this->diseaseModel         = $diseaseModel;
+        $this->professionalModel    = $professionalModel;
         $this->userModel            = $userModel;
         $this->eventLogModel        = $eventLogModel;
         $this->eventLogTypeModel    = $eventLogTypeModel;
@@ -43,16 +47,16 @@ class PatientController extends Controller
 
     public function index(Request $request, Response $response): Response
     {
-        $patients = $this->patientModel->getAll();
+        $attendances = $this->attendanceModel->getAll();
 
-        return $this->view->render($response, 'admin/patient/index.twig', ['patients' => $patients]);
+        return $this->view->render($response, 'admin/attendance/index.twig', ['attendances' => $attendances]);
     }
 
     public function add(Request $request, Response $response): Response
     {
         if (empty($request->getParsedBody())) {
-            $diseases = $this->diseaseModel->getAll();
-            return $this->view->render($response, 'admin/patient/add.twig', ['diseases' => $diseases]);
+
+            return $this->view->render($response, 'admin/attendance/add.twig');
         }
 
         $data = $request->getParsedBody();

@@ -4,34 +4,32 @@ declare(strict_types=1);
 namespace Farol360\Ancora\Model;
 
 use Farol360\Ancora\Model;
-use Farol360\Ancora\Model\EventLog;
+use Farol360\Ancora\Model\Attendance;
 
-class EventLogModel extends Model
+class AttendanceModel extends Model
 {
-    public function add(EventLog $eventLog)
+    public function add(Attendance $attendance)
     {
         $sql = "
-            INSERT INTO event_logs (
-                id_event_log_type,
-                date,
-                description,
+            INSERT INTO attendances (
                 id_patient,
-                id_professional
+                id_professional,
+                date,
+                description
                 )
             VALUES (
-                :id_event_log_type,
-                :date,
-                :description,
                 :id_patient,
-                :id_professional)
+                :id_professional,
+                :date,
+                :description
+                )
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
-            ':id_event_log_type'    => $eventLog->id_event_log_type,
-            ':date'                 => $eventLog->date,
-            ':description'          => $eventLog->description,
-            ':id_patient'           => $eventLog->id_patient,
-            ':id_professional'      => $eventLog->id_professional
+            ':id_patient'           => $attendance->id_patient,
+            ':id_professional'      => $attendance->id_professional,
+            ':date'                 => $attendance->date,
+            ':description'          => $attendance->description
 
         ];
         if ($query->execute($parameters)) {
@@ -43,7 +41,7 @@ class EventLogModel extends Model
 
     public function delete(int $id): bool
     {
-       $sql = "DELETE FROM event_logs WHERE id = :id";
+       $sql = "DELETE FROM attendances WHERE id = :id";
         $query = $this->db->prepare($sql);
         $parameters = [':id' => $id];
         return $query->execute($parameters);
@@ -55,7 +53,7 @@ class EventLogModel extends Model
             SELECT
                 *
             FROM
-                event_logs
+                attendances
             WHERE
                 id = :id
             LIMIT 1
@@ -63,7 +61,7 @@ class EventLogModel extends Model
         $query = $this->db->prepare($sql);
         $parameters = [':id' => $id];
         $query->execute($parameters);
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, EventLog::class);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Attendance::class);
         return $query->fetch();
     }
 
@@ -73,7 +71,7 @@ class EventLogModel extends Model
             SELECT
                 *
             FROM
-                event_logs
+                attendances
             ORDER BY
                 date
             LIMIT ? , ?
@@ -82,7 +80,7 @@ class EventLogModel extends Model
         $query->bindValue(1, $offset, \PDO::PARAM_INT);
         $query->bindValue(2, $limit, \PDO::PARAM_INT);
         $query->execute();
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, EventLog::class);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Attendance::class);
         return $query->fetchAll();
     }
 
@@ -155,27 +153,25 @@ class EventLogModel extends Model
         return $query->fetchAll();
     }
 
-    public function update(EventLog $eventLog): bool
+    public function update(Attendance $attendances): bool
     {
         $sql = "
             UPDATE
-                event_logs
+                attendances
             SET
-                id_event_log_type   = :id_event_log_type,
-                date                = :date,
-                description         = :description,
                 id_patient          = :id_patient,
-                id_professional     = :id_professional
+                id_professional     = :id_professional,
+                date                = :date,
+                description         = :description
             WHERE
                 id = :id
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
-            ':id_event_log_type'=> $eventLog->id_event_log_type,
-            ':date'             => $eventLog->date,
-            ':description'      => $eventLog->description,
             ':id_patient'       => $eventLog->id_patient,
             ':id_professional'  => $eventLog->id_professional,
+            ':date'             => $eventLog->date,
+            ':description'      => $eventLog->description,
             ':id'               => $eventLog->id
         ];
         return $query->execute($parameters);

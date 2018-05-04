@@ -1,0 +1,94 @@
+{% extends "admin/layout.twig" %}
+{% block html_title %}Atendimentos - Administração - {{ parent() }}{% endblock %}
+{% set nav_active = 'attendances' %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{{ base_url() }}/admin">Início</a></li>
+  <li><a href="{{ base_url() }}/admin/attendances">Atendimentos</a></li>
+  <li class="active">Adicionar</li>
+</ol>
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-10">
+    <div class="card">
+  <div class="card-header" data-background-color="blue">
+    <div class="row">
+      <div class="col-xs-12 ">
+        <h3>Adicionar Atendimento</h3>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <form role="form" data-toggle="validator" action="{{ base_url() }}/admin/attendances/add" method="POST">
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-3">
+              <div class="form-group">
+                <input class="form-control" type="date" name="date">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label for="selectDisease">Paciente</label>
+                <select class="form-control" id="selectPatient" name="id_patient">
+                  {% for patient in patients %}
+                  <option value="{{ patient.id }}"{{ patient.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label for="selectDisease">Profissional</label>
+                <select class="form-control" id="selectProfessional" name="id_professional">
+                  {% for professional in professionals %}
+                  <option value="{{ professional.id }}"{{ professional.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label>Observações:</label>
+                <textarea rows="8" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success">Adicionar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+<script src="{{ base_url() }}/js/jquery.mask.js"></script>
+
+
+<script type="text/javascript">
+
+$('#inputCpf').mask('000.000.000-00', {reverse: true});
+$('#inputCep').mask('00000-000');
+</script>
+
+{% endblock %}

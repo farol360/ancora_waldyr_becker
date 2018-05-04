@@ -19,6 +19,8 @@ class ProfessionalController extends Controller
 
     protected $professionalModel;
     protected $professionalTypeModel;
+    protected $eventLogModel;
+    protected $eventLogTypeModel;
     protected $userModel;
 
     public function __construct(
@@ -27,12 +29,16 @@ class ProfessionalController extends Controller
         Model $professionalModel,
         Model $professionalTypeModel,
         Model $userModel,
+        Model $eventLogModel,
+        Model $eventLogTypeModel,
         EntityFactory $entityFactory
     ) {
         parent::__construct($view, $flash);
         $this->professionalModel = $professionalModel;
         $this->professionalTypeModel = $professionalTypeModel;
         $this->userModel    = $userModel;
+        $this->eventLogModel = $eventLogModel;
+        $this->eventLogTypeModel = $eventLogTypeModel;
         $this->entityFactory = $entityFactory;
     }
 
@@ -68,10 +74,22 @@ class ProfessionalController extends Controller
         $professional = $this->entityFactory->createProfessional($professional);
 
 
-        $this->professionalModel->add($professional);
+        $id_professional = $this->professionalModel->add($professional);
 
-        $this->flash->addMessage('success', 'Paciente adicionado com sucesso.');
-        return $this->httpRedirect($request, $response, '/admin/professionals');
+        if ( ($id_professional != null) || ($id_professional != false) ) {
+            $eventLog['id_professional']    = $id_professional;
+            $eventLog['id_event_log_type']  = $this->eventLogTypeModel->getBySlug('create_professional')->id;
+            $eventLog['description'] = 'Profissional ' . $user->name .' cadastrado';
+
+            $eventLog = $this->entityFactory->createEventLog($eventLog);
+
+            $this->eventLogModel->add($eventLog);
+
+           $this->flash->addMessage('success', 'Paciente adicionado com sucesso.');
+            return $this->httpRedirect($request, $response, '/admin/professionals');
+        }
+
+
     }
 
     public function delete(Request $request, Response $response, array $args): Response
@@ -108,15 +126,16 @@ class ProfessionalController extends Controller
         $id = intval($args['id']);
         $professional = $this->professionalModel->get($id);
 
-        return $this->view->render($response, 'admin/professional/history.twig', ['professional' => $professional]);
+        $event_logs = $this->eventLogModel->getByProfessional($id);
+
+        return $this->view->render($response, 'admin/professional/history.twig', ['professional' => $professional,
+            'event_logs' => $event_logs]);
     }
 
     public function update(Request $request, Response $response): Response
     {
 
         $data = $request->getParsedBody();
-
-        var_dump($data);
 
         $professional['id'] = (int) $data['id'];
         $professional['id_user'] = (int) $data['id_user'];
@@ -130,11 +149,25 @@ class ProfessionalController extends Controller
         $user_new = $user_old =  $user;
         $user_new = $this->entityFactory->createUser($user_new);
 
-        $this->professionalModel->update($professional);
-        $this->userModel->update($user_new);
+        $professional_return = $this->professionalModel->update($professional);
+        $user_return = $this->userModel->update($user_new);
 
-        $this->flash->addMessage('success', 'Professional atualizado com sucesso.');
-        return $this->httpRedirect($request, $response, '/admin/professionals');
+        // if it's all ok with updates, create event log
+        if ( (($professional_return != null) || ($professional_return != false)) && ($user_return != null) || ($user_return != false)  ) {
+
+            $eventLog['id_professional']         = $professional->id;
+            $eventLog['id_event_log_type']  = $this->eventLogTypeModel->getBySlug('edit_professional')->id;
+            $eventLog['description'] = 'Profissional ' . $user->name .' atualizado';
+
+            $eventLog = $this->entityFactory->createEventLog($eventLog);
+            $this->eventLogModel->add($eventLog);
+
+            $this->flash->addMessage('success', 'Professional atualizado com sucesso.');
+            return $this->httpRedirect($request, $response, '/admin/professionals');
+        }
+
+
+
     }
 
     public function verifyUserByEmail (Request $request, Response $response) {

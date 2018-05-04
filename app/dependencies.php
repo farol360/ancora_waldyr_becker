@@ -120,6 +120,20 @@ Farol360\Ancora\User::setupUser($container);
 // ------------------
 // ------------------
 
+$container['Farol360\Ancora\Controller\Admin\AttendanceController'] = function ($c) {
+    return new Farol360\Ancora\Controller\Admin\AttendanceController(
+        $c['view'],
+        $c['flash'],
+        new Farol360\Ancora\Model\AttendanceModel($c['db']),
+        new Farol360\Ancora\Model\PatientModel($c['db']),
+        new Farol360\Ancora\Model\ProfessionalModel($c['db']),
+        new Farol360\Ancora\Model\UserModel($c['db']),
+        new Farol360\Ancora\Model\EventLogModel($c['db']),
+        new Farol360\Ancora\Model\EventLogTypeModel($c['db']),
+        new Farol360\Ancora\Model\EntityFactory()
+    );
+};
+
 $container['Farol360\Ancora\Controller\Admin\DiseaseController'] = function ($c) {
     return new Farol360\Ancora\Controller\Admin\DiseaseController(
         $c['view'],
@@ -156,6 +170,8 @@ $container['Farol360\Ancora\Controller\Admin\ProfessionalController'] = function
         new Farol360\Ancora\Model\ProfessionalModel($c['db']),
         new Farol360\Ancora\Model\ProfessionalTypeModel($c['db']),
         new Farol360\Ancora\Model\UserModel($c['db']),
+        new Farol360\Ancora\Model\EventLogModel($c['db']),
+        new Farol360\Ancora\Model\EventLogTypeModel($c['db']),
         new Farol360\Ancora\Model\EntityFactory()
     );
 };
