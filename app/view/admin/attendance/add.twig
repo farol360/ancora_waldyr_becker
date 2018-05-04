@@ -1,6 +1,9 @@
 {% extends "admin/layout.twig" %}
 {% block html_title %}Atendimentos - Administração - {{ parent() }}{% endblock %}
 {% set nav_active = 'attendances' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock %}
 {% block breadcrumbs %}
 <ol class="breadcrumb">
   <li><a href="{{ base_url() }}/admin">Início</a></li>
@@ -38,7 +41,7 @@
                 <label for="selectDisease">Paciente</label>
                 <select class="form-control" id="selectPatient" name="id_patient">
                   {% for patient in patients %}
-                  <option value="{{ patient.id }}"{{ patient.name }}</option>
+                  <option value="{{ patient.id }}">{{ patient.name }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -51,7 +54,7 @@
                 <label for="selectDisease">Profissional</label>
                 <select class="form-control" id="selectProfessional" name="id_professional">
                   {% for professional in professionals %}
-                  <option value="{{ professional.id }}"{{ professional.name }}</option>
+                  <option value="{{ professional.id }}"> {{ professional.user_name }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -62,7 +65,7 @@
             <div class="col-xs-12">
               <div class="form-group">
                 <label>Observações:</label>
-                <textarea rows="8" class="form-control"></textarea>
+                <textarea rows="8" class="form-control" id="description" name="description"></textarea>
               </div>
             </div>
           </div>
@@ -76,19 +79,27 @@
   </div>
 </div>
 
-
-
 {% endblock %}
 {% block javascripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 
 <script src="{{ base_url() }}/js/jquery.mask.js"></script>
 
-
 <script type="text/javascript">
 
 $('#inputCpf').mask('000.000.000-00', {reverse: true});
 $('#inputCep').mask('00000-000');
+</script>
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+  var description = new SimpleMDE({
+    element: $("#description")[0],
+    spellChecker: false,
+    status: false,
+    toolbar: false,
+
+  });
 </script>
 
 {% endblock %}
