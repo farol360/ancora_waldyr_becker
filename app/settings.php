@@ -48,6 +48,8 @@ return [
     'version' => [
         'version' => getenv('VERSION'),
         'stage' => getenv('STAGE'),
-        'date' => getenv('DATE')
+        'date' => getenv('DATE'),
+        'branch' => getenv('BRANCH'),
+        'repository' => getenv('REPOSITORY')
     ]
 ];
