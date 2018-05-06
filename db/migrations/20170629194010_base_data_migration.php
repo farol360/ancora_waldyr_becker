@@ -273,6 +273,11 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 3,
             ],
             [
+                'resource' => '/admin/sobre',
+                'description' => 'Sobre o sistema',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/user',
                 'description' => 'Ver usuários',
                 'role_id' => 2,

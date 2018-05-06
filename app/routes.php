@@ -85,6 +85,8 @@ $app->group('/admin', function () {
         $this->post('/update', RoleAdmin::class . ':update');
     });
 
+    $this->get('/sobre', IndexAdmin::class . ':sobre');
+
     $this->group('/user', function () {
         $this->get('[/]', UserAdmin::class . ':index');
         $this->get('/all', UserAdmin::class . ':index');

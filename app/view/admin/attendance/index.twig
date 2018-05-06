@@ -24,16 +24,22 @@
             Busca
           </div>
           <div class="card-content">
-            <div class="col-sm-5">
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="id">ID</label>
+                <input id="id" type="text" name="id" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-4">
               <div class="form-group">
                 <label for="patient_name">Nome Paciente</label>
                 <input id="patient_name" type="text" name="patient_name" class="form-control">
               </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <div class="form-group">
-                <label for="patient_name">Nome Profissional</label>
-                <input id="patient_name" type="text" name="patient_name" class="form-control">
+                <label for="professional_name">Nome Profissional</label>
+                <input id="professional_name" type="text" name="professional_name" class="form-control">
               </div>
             </div>
             <div class="col-sm-2">
@@ -68,6 +74,7 @@
           <table class="table table-striped data-table">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Data</th>
                 <th>Profissional</th>
                 <th>Paciente</th>
@@ -79,6 +86,7 @@
             <tbody>
               {% for attendance in attendances %}
                 <tr>
+                  <td>{{ attendance.id }}</td>
                   <td>{{ attendance.date }}</td>
                   <td>{{ attendance.professional_name }}</td>
                   <td>{{ attendance.patient_name }}</td>

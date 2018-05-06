@@ -194,6 +194,10 @@ class AttendanceController extends Controller
         $id = intval($args['id']);
         $attendance = $this->attendanceModel->get($id);
 
+        $attendance->name_patient = $this->patientModel->get((int)$attendance->id_patient)->name;
+        $attendance->name_professional = $this->professionalModel->get((int)$attendance->id_professional)->name;
+
+
         if (!$attendance) {
             $this->flash->addMessage('danger', 'Atendimento não encontrado.');
             return $this->httpRedirect($request, $response, '/admin/attendances');

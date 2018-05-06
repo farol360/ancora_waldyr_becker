@@ -1,0 +1,32 @@
+{% extends "admin/layout.twig" %}
+{% block html_title %}Administração - {{ parent() }}{% endblock %}
+{% set nav_active = 'dashboard' %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li class="active">Início</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+
+<div class="main">
+  <h3>Projeto F.A.P. Câncer.</h3>
+  <p>Projeto desenvolvido pela Farol 360 para o cliente Fundação Waydyr Becker de Apoio ao Paciente com Câncer.</p>
+  <p><strong>Versão Atual:</strong> {{ version.version }}</p>
+  <p><strong>Etapa do Projeto:</strong> {{ version.stage }}</p>
+  <p><strong>Data:</strong> {{ version.date }}</p>
+
+  <p>O atual escopo do sistema:</p>
+  <ul>
+    <li>Gerenciar Pacientes;</li>
+    <li>Gerenciar Profissionais;</li>
+    <li>Gerenciar Estoque;</li>
+    <li>Gerenciar Atendimentos;</li>
+    <li>Gerenciar Doações;</li>
+    <li>Gerenciar Empréstimos.</li>
+  </ul>
+
+</div>
+
+{% endblock %}
