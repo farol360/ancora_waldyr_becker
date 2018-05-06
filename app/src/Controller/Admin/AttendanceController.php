@@ -48,7 +48,10 @@ class AttendanceController extends Controller
     public function index(Request $request, Response $response): Response
     {
         $attendances = $this->attendanceModel->getAll();
-
+        foreach ($attendances as $attendance) {
+            $attendance->patient_name = $this->patientModel->get((int)$attendance->id_patient)->name;
+            $attendance->professional_name = $this->professionalModel->get((int)$attendance->id_professional)->name;
+        }
         return $this->view->render($response, 'admin/attendance/index.twig', ['attendances' => $attendances]);
     }
 
@@ -70,43 +73,23 @@ class AttendanceController extends Controller
 
         $data = $request->getParsedBody();
 
-        // set manual data. change this on the future.
-        $data['password'] = '1234';
-        $data['role_id'] = 5;
+        $attendance = $this->entityFactory->createAttendance($data);
 
-        // verify email
-        if ($this->patientModel->getByEmail($data['email']) != false) {
-            $this->flash->addMessage('success', 'O email já existe. por favor cadastre um email único.');
-            return $this->httpRedirect($request, $response, '/admin/patients/add');
-        }
+        $id_attendance = $this->attendanceModel->add($attendance);
 
-        $user = $this->entityFactory->createUser($data);
-
-        // add new user
-        $patient['id_user'] = $this->userModel->add($user);
-
-        // set patient type manual;
-        $patient['id_patient_type'] = 1;
-
-        // set disease
-        $patient['id_disease'] = (int) $data['id_disease'];
-
-        $patient = $this->entityFactory->createPatient($patient);
-
-        $id_patient = $this->patientModel->add($patient);
-
-        // create eventLog when add patient
-        if ( ($id_patient != null) || ($id_patient != false) )
+        // create eventLog when add attendance
+        if ( ($id_attendance != null) || ($id_attendance != false) )
         {
-            $eventLog['id_patient']         = $id_patient;
-            $eventLog['id_event_log_type']  = $this->eventLogTypeModel->getBySlug('create_patient')->id;
-            $eventLog['description'] = 'Paciente ' . $user->name .' cadastrado';
+            $eventLog['id_patient']         = $attendance->id_patient;
+            $eventLog['id_professional']    = $attendance->id_professional;
+            $eventLog['id_event_log_type']  = $this->eventLogTypeModel->getBySlug('attendance')->id;
+            $eventLog['description'] = $attendance->description;
 
             $eventLog = $this->entityFactory->createEventLog($eventLog);
             $this->eventLogModel->add($eventLog);
 
-            $this->flash->addMessage('success', 'Paciente adicionado com sucesso.');
-            return $this->httpRedirect($request, $response, '/admin/patients');
+            $this->flash->addMessage('success', 'Atendimento adicionado com sucesso.');
+            return $this->httpRedirect($request, $response, '/admin/attendances');
         }
 
 
@@ -204,5 +187,18 @@ class AttendanceController extends Controller
         }
 
 
+    }
+
+    public function view(Request $request, Response $response, array $args): Response
+    {
+        $id = intval($args['id']);
+        $attendance = $this->attendanceModel->get($id);
+
+        if (!$attendance) {
+            $this->flash->addMessage('danger', 'Atendimento não encontrado.');
+            return $this->httpRedirect($request, $response, '/admin/attendances');
+        }
+
+        return $this->view->render($response, 'admin/attendance/view.twig', ['attendance' => $attendance]);
     }
 }

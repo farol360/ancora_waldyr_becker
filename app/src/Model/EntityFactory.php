@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Farol360\Ancora\Model;
 
 // business objects
+use Farol360\Ancora\Model\Attendance;
 use Farol360\Ancora\Model\Disease;
 use Farol360\Ancora\Model\EventLog;
 use Farol360\Ancora\Model\Patient;
@@ -20,6 +21,11 @@ class EntityFactory
 {
 
     // business classes
+    public function createAttendance(array $data = []): Attendance
+    {
+        return new Attendance($data);
+    }
+
     public function createDisease(array $data = []): Disease
     {
         return new Disease($data);
