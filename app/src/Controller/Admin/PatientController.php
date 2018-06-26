@@ -85,6 +85,8 @@ class PatientController extends Controller
         $patient['rg'] = $data['rg'];
 
         $patient['sus'] = $data['sus'];
+        $patient['down'] = 0;
+        $patient['down_obs'] = $data['down_obs'];
 
         $patient = $this->entityFactory->createPatient($patient);
 
@@ -161,6 +163,14 @@ class PatientController extends Controller
         $patient['tel_numero_2'] = $data['tel_numero_2'];
         $patient['rg'] = $data['rg'];
         $patient['sus'] = $data['sus'];
+
+        if ($data['down'] == 'on') {
+            $patient['down'] = 1;
+        } else {
+            $patient['down'] = 0;
+        }
+
+        $patient['down_obs'] = $data['down_obs'];
 
         $patient = $this->entityFactory->createPatient($patient);
 

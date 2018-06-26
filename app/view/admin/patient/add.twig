@@ -198,13 +198,15 @@
 
 
           </div>
-          <div class="form-group">
-            <label for="selectDisease">Doença</label>
-            <select class="form-control" id="selectDisease" name="id_disease">
-              {% for disease in diseases %}
-              <option value="{{ disease.id }}">{{ disease.cid_version }} - {{ disease.cid_code }} - {{ disease.name }}</option>
-              {% endfor %}
-            </select>
+          <div class="row">
+            <div class="form-group">
+              <label for="selectDisease">Doença</label>
+              <select class="form-control" id="selectDisease" name="id_disease">
+                {% for disease in diseases %}
+                <option value="{{ disease.id }}">{{ disease.cid_version }} - {{ disease.cid_code }} - {{ disease.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
           </div>
 
           <button type="submit" class="btn btn-success">Adicionar</button>

@@ -13,6 +13,8 @@ class Patient
     public $tel_numero_2;
     public $rg;
     public $sus;
+    public $down;
+    public $down_obs;
 
     public function __construct(array $data = [])
     {
@@ -24,5 +26,7 @@ class Patient
         $this->tel_numero_2 = $data['tel_numero_2'] ?? null;
         $this->rg = $data['rg'] ?? null;
         $this->sus = $data['sus'] ?? null;
+        $this->down = $data['down'] ?? null;
+        $this->down_obs = $data['down_obs'] ?? null;
     }
 }
