@@ -29,7 +29,8 @@ class ProfessionalType extends AbstractMigration
     {
         $professionals_types = $this->table('professional_types');
         $professionals_types->addColumn('name', 'string');
-        $professionals_types->addColumn('description', 'string');
+        $professionals_types->addColumn('description', 'string', ['null' => true]);
+        $professionals_types->addColumn('register', 'string', ['null' => true]);
         $professionals_types->create();
     }
 }

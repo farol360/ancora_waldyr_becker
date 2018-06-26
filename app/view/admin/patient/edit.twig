@@ -90,6 +90,16 @@
               <label for="inputCpf">CPF</label>
               <input type="text" class="form-control" id="inputCpf" name="cpf" placeholder="" value="{{ patient.cpf }}" title="Número do CPF com pontos e traço">
             </div>
+            <div class="col-sm-3 form-group">
+              <label for="inputRg">RG</label>
+              <input type="text" class="form-control" id="inputRg" name="rg" placeholder="" value="{{ patient.rg }}" title="Número do RG com pontos e traço">
+            </div>
+            <div class="col-sm-3 form-group">
+              <label for="inputSus">Cartão SUS</label>
+              <input type="text" class="form-control" id="inputSus" name="sus" placeholder="" value="{{ patient.sus }}" title="Número do RG com pontos e traço">
+            </div>
+          </div>
+          <div class="row">
             <div class="col-sm-2 ">
               <div class="form-group">
                 <label for="inputTelArea">DDD</label>
@@ -99,6 +109,18 @@
             <div class=" col-sm-4 form-group">
               <label for="inputTelefone">Telefone</label>
               <input type="number" class="form-control" id="inputTelefone" name="tel_numero" value="{{ patient.tel_numero }}" placeholder="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2 ">
+              <div class="form-group">
+                <label for="inputTelArea">DDD 2</label>
+                <input type="number" class="form-control" id="inputTelArea2" name="tel_area_2" value="{{ patient.tel_area_2 }}" placeholder="">
+              </div>
+            </div>
+            <div class=" col-sm-4 form-group">
+              <label for="inputTelefone">Telefone 2</label>
+              <input type="number" class="form-control" id="inputTelefone2" name="tel_numero_2" value="{{ patient.tel_numero_2 }}" placeholder="">
             </div>
           </div>
           <div class="row">

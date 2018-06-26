@@ -15,12 +15,14 @@ class AttendanceModel extends Model
                 id_patient,
                 id_professional,
                 date,
+                time,
                 description
                 )
             VALUES (
                 :id_patient,
                 :id_professional,
                 :date,
+                :time,
                 :description
                 )
         ";
@@ -29,6 +31,7 @@ class AttendanceModel extends Model
             ':id_patient'           => $attendance->id_patient,
             ':id_professional'      => $attendance->id_professional,
             ':date'                 => $attendance->date,
+            ':time'                 => $attendance->time,
             ':description'          => $attendance->description
 
         ];
@@ -162,6 +165,7 @@ class AttendanceModel extends Model
                 id_patient          = :id_patient,
                 id_professional     = :id_professional,
                 date                = :date,
+                time                = :time,
                 description         = :description
             WHERE
                 id = :id
@@ -171,6 +175,7 @@ class AttendanceModel extends Model
             ':id_patient'       => $eventLog->id_patient,
             ':id_professional'  => $eventLog->id_professional,
             ':date'             => $eventLog->date,
+            ':time'             => $eventLog->time,
             ':description'      => $eventLog->description,
             ':id'               => $eventLog->id
         ];

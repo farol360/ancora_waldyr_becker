@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class ProfessionalData extends AbstractMigration
+class DiseaseData extends AbstractMigration
 {
     /**
      * Change Method.
@@ -25,18 +25,17 @@ class ProfessionalData extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-
     public function up()
     {
-        $professional_type = [
+        $disease = [
             [
                 'id' => 1,
-                'name' => 'Tipo Padrão',
+                'name' => 'Doença Padrão',
                 'description' => 'Tipo padrão de Profissional',
-                'register' => 'CRM-123'
+                'cid_version' => '123',
+                'cid_code'    => '123'
             ]
         ];
-        $this->insert('professional_types', $professional_type);
+        $this->insert('diseases', $disease);
     }
-
 }

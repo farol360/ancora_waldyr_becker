@@ -31,6 +31,10 @@ class PatientMigration extends AbstractMigration
         $patients->addColumn('id_user', 'integer');
         $patients->addColumn('id_patient_type', 'integer');
         $patients->addColumn('id_disease', 'integer');
+        $patients->addColumn('tel_area_2', 'integer', ['null' => true]);
+        $patients->addColumn('tel_numero_2', 'integer', ['null' => true]);
+        $patients->addColumn('rg', 'string', ['null' => true]);
+        $patients->addColumn('sus', 'string', ['null' => true]);
         $patients->create();
 
     }

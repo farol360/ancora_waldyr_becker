@@ -78,6 +78,14 @@ class PatientController extends Controller
         // set disease
         $patient['id_disease'] = (int) $data['id_disease'];
 
+        $patient['tel_area_2'] = $data['tel_area_2'];
+
+        $patient['tel_numero_2'] = $data['tel_numero_2'];
+
+        $patient['rg'] = $data['rg'];
+
+        $patient['sus'] = $data['sus'];
+
         $patient = $this->entityFactory->createPatient($patient);
 
         $id_patient = $this->patientModel->add($patient);
@@ -149,6 +157,10 @@ class PatientController extends Controller
         $patient['id_user'] = (int) $data['id_user'];
         $patient['id_patient_type'] = 1;
         $patient['id_disease'] = $data['id_disease'];
+        $patient['tel_area_2'] = $data['tel_area_2'];
+        $patient['tel_numero_2'] = $data['tel_numero_2'];
+        $patient['rg'] = $data['rg'];
+        $patient['sus'] = $data['sus'];
 
         $patient = $this->entityFactory->createPatient($patient);
 

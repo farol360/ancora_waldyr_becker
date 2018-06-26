@@ -14,16 +14,23 @@ class PatientModel extends Model
             INSERT INTO patients (
                 id_user,
                 id_patient_type,
-                id_disease
+                id_disease,
+                tel_area_2,
+                tel_numero_2,
+                rg,
+                sus
                 )
-            VALUES (:id_user, :id_patient_type, :id_disease)
+            VALUES (:id_user, :id_patient_type, :id_disease, :tel_area_2, :tel_numero_2, :rg, :sus)
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
             ':id_user'          => $patient->id_user,
             ':id_patient_type'  => $patient->id_patient_type,
-            ':id_disease'       => $patient->id_disease
-
+            ':id_disease'       => $patient->id_disease,
+            ':tel_area_2'       => $patient->tel_area_2,
+            ':tel_numero_2'     => $patient->tel_numero_2,
+            ':rg'               => $patient->rg,
+            ':sus'               => $patient->sus,
         ];
         if ($query->execute($parameters)) {
             return $this->db->lastInsertId();
@@ -46,6 +53,10 @@ class PatientModel extends Model
             SELECT
                 users.*,
                 patients.id as patient_id,
+                patients.tel_area_2 as tel_area_2,
+                patients.tel_numero_2 as tel_numero_2,
+                patients.rg as rg,
+                patients.sus as sus,
                 diseases.id as disease_id,
                 diseases.name as disease_name,
                 diseases.description as disease_description,
@@ -111,7 +122,11 @@ class PatientModel extends Model
             SET
                 id_user         = :id_user,
                 id_patient_type = :id_patient_type,
-                id_disease      = :id_disease
+                id_disease      = :id_disease,
+                tel_area_2      = :tel_area_2,
+                tel_numero_2    = :tel_numero_2,
+                rg    = :rg,
+                sus    = :sus
             WHERE
                 id = :id
         ";
@@ -120,7 +135,12 @@ class PatientModel extends Model
             ':id_user'          => $patient->id_user,
             ':id_patient_type'  => $patient->id_patient_type,
             ':id_disease'       => $patient->id_disease,
-            ':id'               => $patient->id
+            ':id'               => $patient->id,
+            ':tel_area_2'       => $patient->tel_area_2,
+            ':tel_numero_2'     => $patient->tel_numero_2,
+            ':rg'               => $patient->rg,
+            ':sus'              => $patient->sus
+
         ];
         return $query->execute($parameters);
     }

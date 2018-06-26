@@ -14,6 +14,7 @@ class EventLogModel extends Model
             INSERT INTO event_logs (
                 id_event_log_type,
                 date,
+                time,
                 description,
                 id_patient,
                 id_professional
@@ -21,6 +22,7 @@ class EventLogModel extends Model
             VALUES (
                 :id_event_log_type,
                 :date,
+                :time,
                 :description,
                 :id_patient,
                 :id_professional)
@@ -29,6 +31,7 @@ class EventLogModel extends Model
         $parameters = [
             ':id_event_log_type'    => $eventLog->id_event_log_type,
             ':date'                 => $eventLog->date,
+            ':time'                 => $eventLog->time,
             ':description'          => $eventLog->description,
             ':id_patient'           => $eventLog->id_patient,
             ':id_professional'      => $eventLog->id_professional
@@ -95,6 +98,7 @@ class EventLogModel extends Model
                 event_logs.id_patient,
                 event_logs.id_professional,
                 event_logs.date,
+                event_logs.time,
                 event_logs.description,
                 event_log_types.id as event_log_types_id,
                 event_log_types.slug as event_log_types_slug,
@@ -130,6 +134,7 @@ class EventLogModel extends Model
                 event_logs.id_patient,
                 event_logs.id_professional,
                 event_logs.date,
+                event_logs.time,
                 event_logs.description,
                 event_log_types.id as event_log_types_id,
                 event_log_types.slug as event_log_types_slug,
@@ -163,6 +168,7 @@ class EventLogModel extends Model
             SET
                 id_event_log_type   = :id_event_log_type,
                 date                = :date,
+                time                = :time,
                 description         = :description,
                 id_patient          = :id_patient,
                 id_professional     = :id_professional
@@ -173,6 +179,7 @@ class EventLogModel extends Model
         $parameters = [
             ':id_event_log_type'=> $eventLog->id_event_log_type,
             ':date'             => $eventLog->date,
+            ':time'             => $eventLog->time,
             ':description'      => $eventLog->description,
             ':id_patient'       => $eventLog->id_patient,
             ':id_professional'  => $eventLog->id_professional,

@@ -13,14 +13,16 @@ class ProfessionalTypeModel extends Model
         $sql = "
             INSERT INTO professional_types (
                 name,
-                description
+                description,
+                register
                 )
-            VALUES (:name, :description)
+            VALUES (:name, :description, :register)
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
             ':name'          => $professional_type->name,
             ':description'   => $professional_type->description,
+            ':register'      => $professional_type->register,
 
         ];
         if ($query->execute($parameters)) {
@@ -79,7 +81,8 @@ class ProfessionalTypeModel extends Model
                 professional_types
             SET
                 name         = :name,
-                description  = :description
+                description  = :description,
+                register     = :register
             WHERE
                 id = :id
         ";
@@ -87,7 +90,8 @@ class ProfessionalTypeModel extends Model
         $parameters = [
             ':id'           => $professional_type->id,
             ':name'         => $professional_type->name,
-            ':description'  => $professional_type->description
+            ':description'  => $professional_type->description,
+            ':register'     => $professional_type->register
         ];
         return $query->execute($parameters);
     }
