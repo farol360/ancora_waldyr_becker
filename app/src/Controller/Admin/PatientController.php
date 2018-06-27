@@ -18,6 +18,7 @@ class PatientController extends Controller
 
     protected $patientModel;
     protected $diseaseModel;
+    protected $patientStatusModel;
     protected $userModel;
     protected $eventLogModel;
     protected $eventLogTypeModel;
@@ -27,6 +28,7 @@ class PatientController extends Controller
         FlashMessages $flash,
         Model $patientModel,
         Model $diseaseModel,
+        Model $patientStatusModel,
         Model $userModel,
         Model $eventLogModel,
         Model $eventLogTypeModel,
@@ -35,6 +37,7 @@ class PatientController extends Controller
         parent::__construct($view, $flash);
         $this->patientModel         = $patientModel;
         $this->diseaseModel         = $diseaseModel;
+        $this->patientStatusModel   = $patientStatusModel;
         $this->userModel            = $userModel;
         $this->eventLogModel        = $eventLogModel;
         $this->eventLogTypeModel    = $eventLogTypeModel;
@@ -52,7 +55,8 @@ class PatientController extends Controller
     {
         if (empty($request->getParsedBody())) {
             $diseases = $this->diseaseModel->getAll();
-            return $this->view->render($response, 'admin/patient/add.twig', ['diseases' => $diseases]);
+            $patient_status = $this->patientStatusModel->getAll();
+            return $this->view->render($response, 'admin/patient/add.twig', ['diseases' => $diseases, 'patient_status' => $patient_status]);
         }
 
         $data = $request->getParsedBody();
@@ -85,8 +89,10 @@ class PatientController extends Controller
         $patient['rg'] = $data['rg'];
 
         $patient['sus'] = $data['sus'];
-        $patient['down'] = 0;
-        $patient['down_obs'] = $data['down_obs'];
+        $patient['id_status'] = (int) $data['id_status'];
+        $patient['obs'] = $data['obs'];
+
+
 
         $patient = $this->entityFactory->createPatient($patient);
 
@@ -128,14 +134,15 @@ class PatientController extends Controller
     {
         $id = intval($args['id']);
         $patient = $this->patientModel->get($id);
+
         if (!$patient) {
             $this->flash->addMessage('danger', 'Paciente não encontrado.');
             return $this->httpRedirect($request, $response, '/admin/patients');
         }
 
         $diseases = $this->diseaseModel->getAll();
-
-        return $this->view->render($response, 'admin/patient/edit.twig', ['patient' => $patient, 'diseases' => $diseases]);
+        $patient_status = $this->patientStatusModel->getAll();
+        return $this->view->render($response, 'admin/patient/edit.twig', ['patient' => $patient, 'diseases' => $diseases, 'patient_status' => $patient_status]);
     }
 
     public function history (Request $request, Response $response, array $args)
@@ -158,19 +165,15 @@ class PatientController extends Controller
         $patient['id'] = (int) $data['id'];
         $patient['id_user'] = (int) $data['id_user'];
         $patient['id_patient_type'] = 1;
-        $patient['id_disease'] = $data['id_disease'];
+        $patient['id_disease'] = (int) $data['id_disease'];
         $patient['tel_area_2'] = $data['tel_area_2'];
         $patient['tel_numero_2'] = $data['tel_numero_2'];
         $patient['rg'] = $data['rg'];
         $patient['sus'] = $data['sus'];
 
-        if ($data['down'] == 'on') {
-            $patient['down'] = 1;
-        } else {
-            $patient['down'] = 0;
-        }
+        $patient['id_status'] = (int) $data['id_status'];
 
-        $patient['down_obs'] = $data['down_obs'];
+        $patient['obs'] = $data['obs'];
 
         $patient = $this->entityFactory->createPatient($patient);
 

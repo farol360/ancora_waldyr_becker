@@ -19,10 +19,10 @@ class PatientModel extends Model
                 tel_numero_2,
                 rg,
                 sus,
-                down,
-                down_obs
+                id_status,
+                obs
                 )
-            VALUES (:id_user, :id_patient_type, :id_disease, :tel_area_2, :tel_numero_2, :rg, :sus, :down, :down_obs)
+            VALUES (:id_user, :id_patient_type, :id_disease, :tel_area_2, :tel_numero_2, :rg, :sus, :id_status, :obs)
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
@@ -33,8 +33,8 @@ class PatientModel extends Model
             ':tel_numero_2'     => $patient->tel_numero_2,
             ':rg'               => $patient->rg,
             ':sus'              => $patient->sus,
-            ':down'             => $patient->down,
-            ':down_obs'         => $patient->down_obs,
+            ':id_status'        => $patient->id_status,
+            ':obs'              => $patient->obs,
         ];
         if ($query->execute($parameters)) {
             return $this->db->lastInsertId();
@@ -61,8 +61,8 @@ class PatientModel extends Model
                 patients.tel_numero_2 as tel_numero_2,
                 patients.rg as rg,
                 patients.sus as sus,
-                patients.down as down,
-                patients.down_obs as down_obs,
+                patients.id_status as id_status,
+                patients.obs as obs,
                 diseases.id as disease_id,
                 diseases.name as disease_name,
                 diseases.description as disease_description,
@@ -133,8 +133,8 @@ class PatientModel extends Model
                 tel_numero_2    = :tel_numero_2,
                 rg              = :rg,
                 sus             = :sus,
-                down            = :down,
-                down_obs        = :down_obs
+                id_status            = :id_status,
+                obs        = :obs
             WHERE
                 id = :id
         ";
@@ -148,8 +148,8 @@ class PatientModel extends Model
             ':tel_numero_2'     => $patient->tel_numero_2,
             ':rg'               => $patient->rg,
             ':sus'              => $patient->sus,
-            ':down'             => $patient->down,
-            ':down_obs'         => $patient->down_obs,
+            ':id_status'             => $patient->id_status,
+            ':obs'         => $patient->obs,
 
         ];
         return $query->execute($parameters);

@@ -205,6 +205,29 @@
 
 
           </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <label for="selectStatus">Situação</label>
+              <select class="form-control" id="selectStatus" name="id_status">
+                {% for status in patient_status %}
+                  {% if status.id == patient.id_status %}
+                    <option value="{{ status.id }}" selected>{{ status.name }}</option>
+                  {% else %}
+                    <option value="{{ status.id }}">{{ status.name }}</option>
+                  {% endif %}
+
+                {% endfor %}
+              </select>
+              <div class="form-group">
+                <label for="obs">Observações:</label>
+                <input type="text" class="form-control" id="obs" name="obs" value="{{ patient.obs }}">
+              </div>
+            </div>
+
+
+
+          </div>
           <div class="form-group">
             <label for="selectDisease">Doença</label>
             <select class="form-control" id="selectDisease" name="id_disease">
@@ -219,25 +242,7 @@
             </select>
           </div>
 
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="down" {% if patient.down == 1 %} checked {% endif %}>
-                    Baixa
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="down_obs">Observações:</label>
-                <input type="text" class="form-control" id="down_obs" name="down_obs" value="{{ patient.down_obs }}">
-              </div>
-            </div>
 
-
-
-          </div>
 
           <button type="submit" class="btn btn-success">Editar</button>
         </form>
