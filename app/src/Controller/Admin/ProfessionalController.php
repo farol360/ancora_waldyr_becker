@@ -97,7 +97,7 @@ class ProfessionalController extends Controller
         $id = intval($args['id']);
         $professional = $this->professionalModel->get($id);
 
-        $professional = $this->entityFactory->createProfessional($professional);
+        //$professional = $this->entityFactory->createProfessional($professional);
 
         if (isset($professional)) {
             $this->userModel->delete((int) $professional->id_user);

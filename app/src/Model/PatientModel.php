@@ -63,6 +63,7 @@ class PatientModel extends Model
                 patients.sus as sus,
                 patients.id_status as id_status,
                 patients.obs as obs,
+                patients.id_user,
                 diseases.id as disease_id,
                 diseases.name as disease_name,
                 diseases.description as disease_description,

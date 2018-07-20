@@ -118,11 +118,15 @@ class PatientController extends Controller
     public function delete(Request $request, Response $response, array $args): Response
     {
         $id = intval($args['id']);
+
+        // busca paciente no banco
         $patient = $this->patientModel->get($id);
 
+        // se existir, deleta
         if (isset($patient)) {
+
             $this->userModel->delete((int) $patient->id_user);
-            $this->patientModel->delete((int) $patient->id);
+            $this->patientModel->delete((int) $patient->patient_id);
         }
 
 
