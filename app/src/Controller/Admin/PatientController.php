@@ -59,8 +59,6 @@ class PatientController extends Controller
             return $this->view->render($response, 'admin/patient/add.twig', ['diseases' => $diseases, 'patient_status' => $patient_status]);
         }
 
-        $data = $request->getParsedBody();
-
         // set manual data. change this on the future.
         $data['password'] = '1234';
         $data['role_id'] = 5;
@@ -69,7 +67,7 @@ class PatientController extends Controller
         if ($this->patientModel->getByEmail($data['email']) != false) {
             $this->flash->addMessage('success', 'O email já existe. por favor cadastre um email único.');
             return $this->httpRedirect($request, $response, '/admin/patients/add');
-        }
+        } 
 
         $user = $this->entityFactory->createUser($data);
 
@@ -86,6 +84,8 @@ class PatientController extends Controller
 
         $patient['tel_numero_2'] = $data['tel_numero_2'];
 
+         $patient['obs_tel'] = $data['obs_tel'];
+
         $patient['rg'] = $data['rg'];
 
         $patient['sus'] = $data['sus'];
@@ -96,8 +96,9 @@ class PatientController extends Controller
 
         $patient = $this->entityFactory->createPatient($patient);
 
-        $id_patient = $this->patientModel->add($patient);
-
+        
+        ($id_patient = $this->patientModel->add($patient));
+       
         // create eventLog when add patient
         if ( ($id_patient != null) || ($id_patient != false) )
         {
@@ -172,6 +173,7 @@ class PatientController extends Controller
         $patient['id_disease'] = (int) $data['id_disease'];
         $patient['tel_area_2'] = $data['tel_area_2'];
         $patient['tel_numero_2'] = $data['tel_numero_2'];
+        $patient['obs_tel'] = $data['obs_tel'];
         $patient['rg'] = $data['rg'];
         $patient['sus'] = $data['sus'];
 

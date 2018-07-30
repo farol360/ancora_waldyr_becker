@@ -15,14 +15,15 @@ class PatientModel extends Model
                 id_user,
                 id_patient_type,
                 id_disease,
-                tel_area_2,
+               tel_area_2,
                 tel_numero_2,
+                obs_tel,
                 rg,
                 sus,
                 id_status,
                 obs
                 )
-            VALUES (:id_user, :id_patient_type, :id_disease, :tel_area_2, :tel_numero_2, :rg, :sus, :id_status, :obs)
+            VALUES (:id_user, :id_patient_type, :id_disease, :tel_area_2, :tel_numero_2, :obs_tel, :rg, :sus, :id_status, :obs)
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
@@ -31,6 +32,7 @@ class PatientModel extends Model
             ':id_disease'       => $patient->id_disease,
             ':tel_area_2'       => $patient->tel_area_2,
             ':tel_numero_2'     => $patient->tel_numero_2,
+            ':obs_tel'          => $patient->obs_tel,
             ':rg'               => $patient->rg,
             ':sus'              => $patient->sus,
             ':id_status'        => $patient->id_status,
@@ -59,6 +61,7 @@ class PatientModel extends Model
                 patients.id as patient_id,
                 patients.tel_area_2 as tel_area_2,
                 patients.tel_numero_2 as tel_numero_2,
+                patients.obs_tel as obs_tel,
                 patients.rg as rg,
                 patients.sus as sus,
                 patients.id_status as id_status,
@@ -96,8 +99,7 @@ class PatientModel extends Model
         $parameters = [':email' => $email];
         $query->execute($parameters);
         return $query->fetch();
-    }
-
+    } 
     public function getAll(): array
     {
         $sql = "
@@ -132,6 +134,7 @@ class PatientModel extends Model
                 id_disease      = :id_disease,
                 tel_area_2      = :tel_area_2,
                 tel_numero_2    = :tel_numero_2,
+                obs_tel         = :obs_tel,
                 rg              = :rg,
                 sus             = :sus,
                 id_status            = :id_status,
@@ -144,15 +147,16 @@ class PatientModel extends Model
             ':id_user'          => $patient->id_user,
             ':id_patient_type'  => $patient->id_patient_type,
             ':id_disease'       => $patient->id_disease,
-            ':id'               => $patient->id,
             ':tel_area_2'       => $patient->tel_area_2,
             ':tel_numero_2'     => $patient->tel_numero_2,
+            ':obs_tel'          => $patient->obs_tel,
             ':rg'               => $patient->rg,
             ':sus'              => $patient->sus,
             ':id_status'             => $patient->id_status,
             ':obs'         => $patient->obs,
 
         ];
+
         return $query->execute($parameters);
     }
 }

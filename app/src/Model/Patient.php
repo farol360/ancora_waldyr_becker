@@ -11,6 +11,7 @@ class Patient
     public $id_disease;
     public $tel_area_2;
     public $tel_numero_2;
+    public $obs_tel;
     public $rg;
     public $sus;
     public $id_status;
@@ -24,6 +25,7 @@ class Patient
         $this->id_disease = $data['id_disease'] ?? null;
         $this->tel_area_2 = $data['tel_area_2'] ?? null;
         $this->tel_numero_2 = $data['tel_numero_2'] ?? null;
+        $this->obs_tel = $data['obs_tel'] ?? null;
         $this->rg = $data['rg'] ?? null;
         $this->sus = $data['sus'] ?? null;
         $this->id_status = $data['id_status'] ?? null;
