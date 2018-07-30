@@ -26,7 +26,7 @@ class BaseMigration extends AbstractMigration
         $permissions->create();
 
         $users = $this->table('users');
-        $users->addColumn('email', 'string');
+        $users->addColumn('email', 'string', ['null' => true]);
         $users->addColumn('name', 'string');
         $users->addColumn('password', 'string');
         $users->addColumn('nascimento', 'date', ['null' => true]);
@@ -48,7 +48,6 @@ class BaseMigration extends AbstractMigration
         $users->addColumn('deleted', 'boolean', ['default' => false]);
         $users->addColumn('deleted_at', 'timestamp', ['null' => true]);
         $users->addTimestamps();
-        $users->addIndex(['email'], ['unique' => true]);
         $users->addForeignKey('role_id', 'roles', 'id', [
             'delete' => 'SET_NULL',
             'update' => 'NO_ACTION'

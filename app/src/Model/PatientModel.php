@@ -15,7 +15,7 @@ class PatientModel extends Model
                 id_user,
                 id_patient_type,
                 id_disease,
-               tel_area_2,
+                tel_area_2,
                 tel_numero_2,
                 obs_tel,
                 rg,
@@ -99,7 +99,7 @@ class PatientModel extends Model
         $parameters = [':email' => $email];
         $query->execute($parameters);
         return $query->fetch();
-    } 
+    }
     public function getAll(): array
     {
         $sql = "
@@ -137,13 +137,14 @@ class PatientModel extends Model
                 obs_tel         = :obs_tel,
                 rg              = :rg,
                 sus             = :sus,
-                id_status            = :id_status,
+                id_status       = :id_status,
                 obs        = :obs
             WHERE
                 id = :id
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
+            ':id'               => $patient->id,
             ':id_user'          => $patient->id_user,
             ':id_patient_type'  => $patient->id_patient_type,
             ':id_disease'       => $patient->id_disease,
@@ -152,8 +153,8 @@ class PatientModel extends Model
             ':obs_tel'          => $patient->obs_tel,
             ':rg'               => $patient->rg,
             ':sus'              => $patient->sus,
-            ':id_status'             => $patient->id_status,
-            ':obs'         => $patient->obs,
+            ':id_status'        => $patient->id_status,
+            ':obs'              => $patient->obs,
 
         ];
 

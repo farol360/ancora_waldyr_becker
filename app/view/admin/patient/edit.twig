@@ -37,7 +37,7 @@
               <div class="form-group">
                 <label for="inputEmail">Email</label>
                 <input type="hidden" id="emailOriginal" name="" value="{{ patient.email }}" >
-                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="" value="{{ patient.email }}" required>
+                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="" value="{{ patient.email }}">
                 <p id="email-error" style="color:red;"></p>
                 <script type="text/javascript">
                   $('#inputEmail').change(function(){
@@ -64,8 +64,8 @@
                               $('#email-error').html('o email já está cadastrado.');
                             } else if (data == "false") {
 
-                              $('#email-error').css('color', 'green');
-                              $('#email-error').html('email liberado para cadastro.');
+                              //$('#email-error').css('color', 'green');
+                              //$('#email-error').html('email liberado para cadastro.');
                             }
                           },
                           error: function (data) {

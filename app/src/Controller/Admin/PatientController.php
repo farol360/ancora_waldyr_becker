@@ -59,15 +59,22 @@ class PatientController extends Controller
             return $this->view->render($response, 'admin/patient/add.twig', ['diseases' => $diseases, 'patient_status' => $patient_status]);
         }
 
+        //var_dump($request->getParsedBody());
+        //die;
+
+        // get the body and parse it to an array
+        $data = $request->getParsedBody();
+
         // set manual data. change this on the future.
         $data['password'] = '1234';
         $data['role_id'] = 5;
+
 
         // verify email
         if ($this->patientModel->getByEmail($data['email']) != false) {
             $this->flash->addMessage('success', 'O email já existe. por favor cadastre um email único.');
             return $this->httpRedirect($request, $response, '/admin/patients/add');
-        } 
+        }
 
         $user = $this->entityFactory->createUser($data);
 
@@ -84,7 +91,7 @@ class PatientController extends Controller
 
         $patient['tel_numero_2'] = $data['tel_numero_2'];
 
-         $patient['obs_tel'] = $data['obs_tel'];
+        $patient['obs_tel'] = $data['obs_tel'];
 
         $patient['rg'] = $data['rg'];
 
@@ -96,9 +103,9 @@ class PatientController extends Controller
 
         $patient = $this->entityFactory->createPatient($patient);
 
-        
+
         ($id_patient = $this->patientModel->add($patient));
-       
+
         // create eventLog when add patient
         if ( ($id_patient != null) || ($id_patient != false) )
         {
