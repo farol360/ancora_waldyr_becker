@@ -248,6 +248,31 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 2,
             ],
             [
+                'resource' => '/admin/suppliers',
+                'description' => 'Fabricantes',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/suppliers/add',
+                'description' => 'Fabricantes -Add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/suppliers/edit/:id',
+                'description' => 'Fabricantes',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/suppliers/remove/:id',
+                'description' => 'Fabricantes -Remove.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/suppliers/update',
+                'description' => 'Fabricantes - update',
+                'role_id' => 2,
+            ],
+            [
                 'resource' => '/admin/role',
                 'description' => 'Ver cargos',
                 'role_id' => 3,

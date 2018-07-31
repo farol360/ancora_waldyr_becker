@@ -208,6 +208,15 @@ $container['Farol360\Ancora\Controller\Admin\RoleController'] = function ($c) {
     );
 };
 
+$container['Farol360\Ancora\Controller\Admin\SupplierController'] = function ($c) {
+    return new Farol360\Ancora\Controller\Admin\SupplierController(
+        $c['view'],
+        $c['flash'],
+        new Farol360\Ancora\Model\SupplierModel($c['db']),
+        new Farol360\Ancora\Model\EntityFactory()
+    );
+};
+
 $container['Farol360\Ancora\Controller\Admin\UserController'] = function ($c) {
     return new Farol360\Ancora\Controller\Admin\UserController(
         $c['view'],

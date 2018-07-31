@@ -11,6 +11,8 @@ use Farol360\Ancora\Controller\Admin\ProfessionalController as ProfessionalAdmin
 use Farol360\Ancora\Controller\Admin\ProfessionalTypeController as ProfessionalTypeAdmin;
 use Farol360\Ancora\Controller\Admin\RoleController as RoleAdmin;
 use Farol360\Ancora\Controller\Admin\UserController as UserAdmin;
+use Farol360\Ancora\Controller\Admin\SupplierController as SupplierAdmin;
+
 
 use Farol360\Ancora\Controller\PageController as Page;
 use Farol360\Ancora\Controller\UserController as User;
@@ -86,6 +88,14 @@ $app->group('/admin', function () {
     });
 
     $this->get('/sobre', IndexAdmin::class . ':sobre');
+
+    $this->group('/suppliers', function () {
+        $this->get('[/]', SupplierAdmin::class . ':index');
+        $this->map(['GET', 'POST'], '/add', SupplierAdmin::class . ':add');
+        $this->get('/remove/{id:[0-9]+}', SupplierAdmin::class . ':delete');
+        $this->get('/edit/{id:[0-9]+}', SupplierAdmin::class . ':edit');
+        $this->post('/update', SupplierAdmin::class . ':update');
+    });
 
     $this->group('/user', function () {
         $this->get('[/]', UserAdmin::class . ':index');

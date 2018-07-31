@@ -11,6 +11,8 @@ use Farol360\Ancora\Model\Patient;
 use Farol360\Ancora\Model\PatientType;
 use Farol360\Ancora\Model\Professional;
 use Farol360\Ancora\Model\ProfessionalType;
+use Farol360\Ancora\Model\Supplier;
+
 
 // Ancora objects
 use Farol360\Ancora\Model\Permission;
@@ -56,6 +58,10 @@ class EntityFactory
         return new ProfessionalType($data);
     }
 
+    public function cresteSupplier(array $data = []): Supplier
+    {
+        return new Supplier($data);
+    }
     // permission, users and role Classes
     public function createPermission(array $data = []): Permission
     {

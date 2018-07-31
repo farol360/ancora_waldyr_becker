@@ -100,12 +100,21 @@
             </div>
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <p>Estoque</p>
+                  </a>
+                  <ul class="dropdown-menu">
+                    {% if p_admin_suppliers %}<li><a href="{{ base_url() }}/admin/suppliers">Fornecedores</a></li>{% endif %}
+                    </ul>
+                </li>
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <p>Administração</p>
                   </a>
                   <ul class="dropdown-menu">
-                    {% if p_admin_diseases %}<li><a href="{{ base_url() }}/admin/diseases">Doenças</a></li>{% endif %}
+                    {% if p_admin_diseases %}<li><a href="{{ base_url() }}/admin/diseases">CID</a></li>{% endif %}
                      {% if p_admin_professional_types %}<li><a href="{{ base_url() }}/admin/professional_types">Categorias de Profissionais</a></li>{% endif %}
                   </ul>
                 </li>
