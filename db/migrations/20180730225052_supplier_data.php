@@ -29,11 +29,12 @@ class SupplierData extends AbstractMigration
     {
         $supplier = [
             [
-                'id' => 1,
-                'name' => 'Fornecedor Padrão',
+                'id'          => 1,
+                'name'        => 'Fornecedor Padrão',
                 'description' => 'Descrição do Fornecedor Padrão',
-                'email' => 'fornecedor@fornecedor.com',
-                'telefone' => '0000-0000'
+                'email'       => 'fornecedor@fornecedor.com',
+                'ddd'         => '00',
+                'telefone'    => '0000-0000'
             ]
         ];
         $this->insert('suppliers', $supplier);

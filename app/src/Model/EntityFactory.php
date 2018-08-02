@@ -58,7 +58,7 @@ class EntityFactory
         return new ProfessionalType($data);
     }
 
-    public function cresteSupplier(array $data = []): Supplier
+    public function createSupplier(array $data = []): Supplier
     {
         return new Supplier($data);
     }

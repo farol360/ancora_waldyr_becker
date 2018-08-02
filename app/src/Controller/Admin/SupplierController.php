@@ -39,48 +39,50 @@ class SupplierController extends Controller
 
     public function add(Request $request, Response $response): Response
     {
-       /* if (empty($request->getParsedBody())) {
-            return $this->view->render($response, 'admin/disease/add.twig');
+        if (empty($request->getParsedBody())) {
+            return $this->view->render($response, 'admin/suppliers/add.twig');
         }
 
-        $disease = $request->getParsedBody();
+        $suppliers = $request->getParsedBody();
 
-        $disease = $this->entityFactory->createDisease($request->getParsedBody());
+        $suppliers = $this->entityFactory->createSupplier($request->getParsedBody());
 
-        $this->diseaseModel->add($disease);
+        $this->supplierModel->add($suppliers);
 
 
 
-        $this->flash->addMessage('success', 'Doença adicionada com sucesso.');
-        return $this->httpRedirect($request, $response, '/admin/diseases'); */
+        $this->flash->addMessage('success', 'Fornecedor adicionada com sucesso.');
+        return $this->httpRedirect($request, $response, '/admin/suppliers'); 
     }
 
     public function delete(Request $request, Response $response, array $args): Response
     {
-     /*   $id = intval($args['id']);
-        $this->diseaseModel->delete($id);
+        $id = intval($args['id']);
+        $this->supplierModel->delete($id);
 
-        $this->flash->addMessage('success', 'Doença removida com sucesso.');
-        return $this->httpRedirect($request, $response, '/admin/diseases'); */
+        $this->flash->addMessage('success', 'Fornecedor removida com sucesso.');
+        return $this->httpRedirect($request, $response, '/admin/suppliers'); 
     }
 
     public function edit(Request $request, Response $response, array $args): Response
     {
-      /*  $id = intval($args['id']);
-        $disease = $this->diseaseModel->get($id);
-        if (!$disease) {
-            $this->flash->addMessage('danger', 'Doença não encontrada.');
-            return $this->httpRedirect($request, $response, '/admin/disease');
+        $id = intval($args['id']);
+        $suppliers = $this->supplierModel->get($id);
+        if (!$suppliers) {
+            $this->flash->addMessage('danger', 'Fornecedor não encontrado.');
+            return $this->httpRedirect($request, $response, '/admin/suppliers');
         }
-        return $this->view->render($response, 'admin/disease/edit.twig', ['disease' => $disease]); */
+        return $this->view->render($response, 'admin/suppliers/edit.twig', ['suppliers' => $suppliers]); 
+
+
     }
 
     public function update(Request $request, Response $response): Response
     {
-     /*   $disease = $this->entityFactory->createDisease($request->getParsedBody());
-        $this->diseaseModel->update($disease);
+       $suppliers = $this->entityFactory->createSupplier($request->getParsedBody());
+        $this->supplierModel->update($suppliers);
 
-        $this->flash->addMessage('success', 'Cargo atualizado com sucesso.');
-        return $this->httpRedirect($request, $response, '/admin/diseases'); */
+        $this->flash->addMessage('success', 'Fornecedor atualizado com sucesso.');
+        return $this->httpRedirect($request, $response, '/admin/suppliers'); 
     }
 }

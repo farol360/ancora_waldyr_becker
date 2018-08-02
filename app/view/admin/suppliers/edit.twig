@@ -1,0 +1,72 @@
+{% extends "admin/layout.twig" %}
+{% block html_title %}Fornecedores - Administração - {{ parent() }}{% endblock %}
+{% set nav_active = 'role' %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{{ base_url() }}/admin">Início</a></li>
+  <li><a href="{{ base_url() }}/admin/suppliers">Fornecedores</a></li>
+  <li class="active">Editar</li>
+  <li>{{ suppliers.name }}</li>
+</ol>
+{% endblock %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header" data-background-color="blue">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Editar Fornecedor</h3>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <form role="form" data-toggle="validator" action="{{ base_url() }}/admin/suppliers/update" method="POST">
+        <input type="hidden" name="id" value="{{ suppliers.id }}">
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input class="form-control" id="name" type="text" name="name" placeholder="Nome" autofocus required value="{{ suppliers.name }}">
+
+          </div>
+          <div class="form-group">
+            <label for="description">Descrição:</label>
+            <input id="description" class="form-control" type="text" name="description" placeholder="Descrição" required value="{{ suppliers.description }}">
+          </div>
+
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputRua">Email</label>
+                <input type="text" class="form-control" id="inputObservacoes" name="email" placeholder="" value="{{ suppliers.email }}">
+          </div>
+          </div>
+
+            <div class="col-sm-2 ">
+              <div class="form-group">
+                <label for="inputTelArea">DDD</label>
+                <input type="number" class="form-control" id="inputTelArea" name="ddd" value="{{ suppliers.ddd }}" placeholder="">
+              </div>
+            </div>
+            <div class=" col-sm-4 form-group">
+              <label for="inputTelefone">Telefone</label>
+              <input type="number" class="form-control" id="inputTelefone" name="telefone" value="{{ suppliers.telefone }}" placeholder="">
+            </div>
+            
+        </div>
+
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+{% endblock %}

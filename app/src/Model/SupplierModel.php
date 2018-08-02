@@ -15,15 +15,17 @@ class SupplierModel extends Model
                 name,
                 description,
                 email,
+                ddd,
                 telefone
                 )
-            VALUES (:name, :description, :email, :telefone)
+            VALUES (:name, :description, :email, :ddd, :telefone)
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
             ':name'          => $supplier->name,
             ':description'   => $supplier->description,
-            ':email'      => $supplier->email,
+            ':email'         => $supplier->email,
+            ':ddd'           => $supplier->ddd,
             ':telefone'      => $supplier->telefone,
 
         ];
@@ -85,6 +87,7 @@ class SupplierModel extends Model
                 name         = :name,
                 description  = :description,
                 email        = :email,
+                ddd          = :ddd,
                 telefone     = :telefone
             WHERE
                 id = :id
@@ -95,6 +98,7 @@ class SupplierModel extends Model
             ':name'         => $supplier->name,
             ':description'  => $supplier->description,
             ':email'     => $supplier->email,
+            ':ddd'          => $supplier->ddd,
             ':telefone'     => $supplier->telefone
         ];
         return $query->execute($parameters);

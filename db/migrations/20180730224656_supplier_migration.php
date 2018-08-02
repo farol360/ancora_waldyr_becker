@@ -31,6 +31,7 @@ class SupplierMigration extends AbstractMigration
         $suppliers->addColumn('name', 'string');
         $suppliers->addColumn('description', 'string',['null' => true]);
         $suppliers->addColumn('email', 'string',['null' => true]);
+        $suppliers->addColumn('ddd', 'string',['null' => true]);
         $suppliers->addColumn('telefone', 'string',['null' => true]);
         $suppliers->create();
     }
