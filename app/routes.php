@@ -7,6 +7,7 @@ use Farol360\Ancora\Controller\Admin\AttendanceController as AttendanceAdmin;
 use Farol360\Ancora\Controller\Admin\DiseaseController as DiseaseAdmin;
 use Farol360\Ancora\Controller\Admin\PatientController as PatientAdmin;
 use Farol360\Ancora\Controller\Admin\PermissionController as PermissionAdmin;
+use Farol360\Ancora\Controller\Admin\ProductsController as ProductsAdmin;
 use Farol360\Ancora\Controller\Admin\ProfessionalController as ProfessionalAdmin;
 use Farol360\Ancora\Controller\Admin\ProfessionalTypeController as ProfessionalTypeAdmin;
 use Farol360\Ancora\Controller\Admin\RoleController as RoleAdmin;
@@ -58,6 +59,15 @@ $app->group('/admin', function () {
         $this->get('/delete/{id:[0-9]+}', PermissionAdmin::class . ':delete');
         $this->get('/edit/{id:[0-9]+}', PermissionAdmin::class . ':edit');
         $this->post('/update', PermissionAdmin::class . ':update');
+    });
+
+
+    $this->group('/products', function () {
+        $this->get('[/]', ProductsAdmin::class . ':index');
+        $this->map(['GET', 'POST'], '/add', ProductsAdmin::class . ':add');
+        $this->get('/remove/{id:[0-9]+}', ProductsAdmin::class . ':delete');
+        $this->get('/edit/{id:[0-9]+}', ProductsAdmin::class . ':edit');
+        $this->post('/update', ProductsAdmin::class . ':update');
     });
 
     $this->group('/professionals', function() {

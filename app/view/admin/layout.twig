@@ -104,8 +104,11 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <p>Estoque</p>
                   </a>
-                  <ul class="dropdown-menu">
-                    {% if p_admin_suppliers %}<li><a href="{{ base_url() }}/admin/suppliers">Fornecedores</a></li>{% endif %}
+                    <ul class="dropdown-menu">
+                      {% if p_admin_suppliers %}<li><a href="{{ base_url() }}/admin/suppliers">Fornecedores</a></li>{% endif %}
+                    
+                      {% if p_admin_products %}<li><a href="{{ base_url() }}/admin/products">Produtos</a></li>{% endif %}
+
                     </ul>
                 </li>
 

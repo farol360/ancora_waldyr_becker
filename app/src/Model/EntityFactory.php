@@ -9,6 +9,7 @@ use Farol360\Ancora\Model\Disease;
 use Farol360\Ancora\Model\EventLog;
 use Farol360\Ancora\Model\Patient;
 use Farol360\Ancora\Model\PatientType;
+use Farol360\Ancora\Model\Products;
 use Farol360\Ancora\Model\Professional;
 use Farol360\Ancora\Model\ProfessionalType;
 use Farol360\Ancora\Model\Supplier;
@@ -46,6 +47,11 @@ class EntityFactory
     public function createPatientType(array $data = []): PatientType
     {
         return new PatientType($data);
+    }
+
+     public function createProducts(array $data = []): Products
+    {
+        return new Products($data);
     }
 
     public function createProfessional(array $data = []): Professional

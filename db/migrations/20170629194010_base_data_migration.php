@@ -187,6 +187,35 @@ class BaseDataMigration extends AbstractMigration
                 'description' => 'Atualizar permissão',
                 'role_id' => 3,
             ],
+
+
+            [
+                'resource' => '/admin/products',
+                'description' => 'Produtos',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products/add',
+                'description' => 'Produtos -Add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products/edit/:id',
+                'description' => 'Produtos',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products/remove/:id',
+                'description' => 'Produtos -Remove.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products/update',
+                'description' => 'Produtos - update',
+                'role_id' => 2,
+            ],
+
+
             [
                 'resource' => '/admin/professionals',
                 'description' => 'Administração de Profissionais.',
