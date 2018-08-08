@@ -229,7 +229,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
-                <label for="selectDisease">Doença</label>
+                <label for="selectDisease">CID</label>
                 <select class="form-control" id="selectDisease" name="id_disease">
                   {% for disease in diseases %}
                   <option value="{{ disease.id }}">{{ disease.cid_version }} - {{ disease.cid_code }} - {{ disease.name }}</option>
