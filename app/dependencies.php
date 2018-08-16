@@ -173,6 +173,7 @@ $container['Farol360\Ancora\Controller\Admin\ProductsController'] = function ($c
         $c['view'],
         $c['flash'],
         new Farol360\Ancora\Model\ProductsModel($c['db']),
+        new Farol360\Ancora\Model\ProductsTypeModel($c['db']),
         new Farol360\Ancora\Model\EntityFactory()
     );
 };

@@ -18,48 +18,43 @@ class ProductsController extends Controller
 {
 
     protected $productsModel;
+    protected $productsTypeModel;
 
-    public function __construct(
-        View $view,
+    public function __construct( 
+        View $view, 
         FlashMessages $flash,
         Model $productsModel,
+        Model $productsTypeModel,
         EntityFactory $entityFactory
     ) {
         parent::__construct($view, $flash);
         $this->productsModel = $productsModel;
+        $this->productsTypeModel = $productsTypeModel;
         $this->entityFactory = $entityFactory;
     }
 
     public function index(Request $request, Response $response): Response
     {
         $products = $this->productsModel->getAll();
-
         return $this->view->render($response, 'admin/products/index.twig', ['products' => $products]);
     }
-
     public function add(Request $request, Response $response): Response
     {
         if (empty($request->getParsedBody())) {
-            return $this->view->render($response, 'admin/products/add.twig');
+            $products_type = $this->productsTypeModel->getAll();
+            return $this->view->render($response, 'admin/products/add.twig', ['products_type' => $products_type]);
         }
-
         $products = $request->getParsedBody();
-
         $products = $this->entityFactory->createProducts($request->getParsedBody());
-
         $this->productsModel->add($products);
-
-
 
         $this->flash->addMessage('success', 'Protudo adicionada com sucesso.');
         return $this->httpRedirect($request, $response, '/admin/products'); 
     }
-
     public function delete(Request $request, Response $response, array $args): Response
     {
         $id = intval($args['id']);
         $this->productsModel->delete($id);
-
         $this->flash->addMessage('success', 'Produto removida com sucesso.');
         return $this->httpRedirect($request, $response, '/admin/products'); 
     }
@@ -71,8 +66,12 @@ class ProductsController extends Controller
         if (!$products) {
             $this->flash->addMessage('danger', 'Produto não encontrado.');
             return $this->httpRedirect($request, $response, '/admin/products');
+
+
+
         }
-        return $this->view->render($response, 'admin/products/edit.twig', ['products' => $products]); 
+         $products_type = $this->productsTypeModel->getAll();
+            return $this->view->render($response, 'admin/products/edit.twig', ['products_type' => $products_type]);
 
 
     }
@@ -84,5 +83,10 @@ class ProductsController extends Controller
 
         $this->flash->addMessage('success', 'Produto atualizado com sucesso.');
         return $this->httpRedirect($request, $response, '/admin/products'); 
+
+
+
+
+
     }
 }
