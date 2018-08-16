@@ -215,6 +215,32 @@ class BaseDataMigration extends AbstractMigration
                 'role_id' => 2,
             ],
 
+            [
+                'resource' => '/admin/products_type',
+                'description' => 'Categoria de Produtos',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products_type/add',
+                'description' => 'Categoria de Produtos -Add.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products_type/edit/:id',
+                'description' => 'Categoria de Produtos',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products_type/remove/:id',
+                'description' => 'Categoria de Produtos -Remove.',
+                'role_id' => 2,
+            ],
+            [
+                'resource' => '/admin/products_type/update',
+                'description' => 'Categoria de Produtos - update',
+                'role_id' => 2,
+            ],
+
 
             [
                 'resource' => '/admin/professionals',

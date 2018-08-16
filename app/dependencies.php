@@ -177,6 +177,17 @@ $container['Farol360\Ancora\Controller\Admin\ProductsController'] = function ($c
     );
 };
 
+
+$container['Farol360\Ancora\Controller\Admin\ProductsTypeController'] = function ($c) {
+    return new Farol360\Ancora\Controller\Admin\ProductsTypeController(
+        $c['view'],
+        $c['flash'],
+        new Farol360\Ancora\Model\ProductsTypeModel($c['db']),
+        new Farol360\Ancora\Model\EntityFactory()
+    );
+};
+
+
 $container['Farol360\Ancora\Controller\Admin\ProfessionalController'] = function ($c) {
     return new Farol360\Ancora\Controller\Admin\ProfessionalController(
         $c['view'],
