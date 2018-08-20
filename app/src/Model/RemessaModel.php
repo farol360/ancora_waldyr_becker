@@ -4,25 +4,23 @@ declare(strict_types=1);
 namespace Farol360\Ancora\Model;
 
 use Farol360\Ancora\Model;
-use Farol360\Ancora\Model\Products;
+use Farol360\Ancora\Model\Remessa;
 
-class ProductsModel extends Model
+class RemessaModel extends Model
 {
-    public function add(Products $products)
+    public function add(Remessa $remessa)
     {
         $sql = "
-            INSERT INTO products (
-                name,
-                description,
-                category
+            INSERT INTO remessa (
+                quantity,
+                type
                 )
-            VALUES (:name, :description, :category)
+            VALUES (:quantity, :type)
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
-            ':name'          => $products->name,
-            ':description'   => $products->description,
-            ':category'      => $products->category,
+            ':quantity'          => $remessa->quantity,
+            ':type'              => $remessa->type,
 
         ];
         if ($query->execute($parameters)) {
@@ -34,7 +32,7 @@ class ProductsModel extends Model
 
     public function delete(int $id): bool
     {
-       $sql = "DELETE FROM products WHERE id = :id";
+       $sql = "DELETE FROM remessa WHERE id = :id";
         $query = $this->db->prepare($sql);
         $parameters = [':id' => $id];
         return $query->execute($parameters);
@@ -46,7 +44,7 @@ class ProductsModel extends Model
             SELECT
                 *
             FROM
-                products
+                remessa
             WHERE
                 id = :id
             LIMIT 1
@@ -54,7 +52,7 @@ class ProductsModel extends Model
         $query = $this->db->prepare($sql);
         $parameters = [':id' => $id];
         $query->execute($parameters);
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Products::class);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Remessa::class);
         return $query->fetch();
     }
 
@@ -64,35 +62,33 @@ class ProductsModel extends Model
             SELECT
                *
             FROM
-                products
+                remessa
             ORDER BY
                 id ASC
         ";
         $query = $this->db->prepare($sql);
         $query->execute();
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Products::class);
+        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Remessa::class);
         return $query->fetchAll();
     }
 
-    public function update(Products $products): bool
+    public function update(Remessa $remessa): bool
     {
         $sql = "
             UPDATE
-                products
+                remessa
             SET
-                name         = :name,
-                description  = :description,
-                category        = :category
+                quantity         = :quantity,
+                type             = :type
                
             WHERE
                 id = :id
         ";
         $query = $this->db->prepare($sql);
         $parameters = [
-            ':id'           => $products->id,
-            ':name'         => $products->name,
-            ':description'  => $products->description,
-            ':category'     => $products->category
+            ':id'           => $remessa->id,
+            ':quantity'     => $remessa->quantity,
+            ':type'         => $remessa->type
             ];
         return $query->execute($parameters);
     }

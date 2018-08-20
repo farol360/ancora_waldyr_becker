@@ -15,7 +15,7 @@
     <div class="card-header" data-background-color="blue">
       <div class="row">
         <div class="col-sm-8">
-          <h3>Fabricantes</h3>
+          <h3>Produtos</h3>
         </div>
         <div class="col-sm-4">
           <p class="pull-right">
@@ -36,6 +36,7 @@
                 <th>Nome</th>
                 <th>Descrição</th>
                 <th>Categoria</th>
+                <th>Quantidade</th>
                 <th class="th-button"></th>
                 <th class="th-button"></th>
               </tr>
@@ -47,12 +48,13 @@
                   <td>{{ products.name }}</td>
                   <td>{{ products.description }}</td>
                   <td>{{ products.category }}</td>
+                  <td>{{ products.quatity }}</td>
                   
                   <td style="width:100px"><a class="btn btn-default" href="{{ base_url() }}/admin/products/edit/{{ products.id }}">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
                   </a></td>
                   <td style="width:100px"><a class="btn btn-danger" href="{{ base_url() }}/admin/products/remove/{{ products.id }}">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Apagar
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
                   </a></td>
                 </tr>
               {% else %}

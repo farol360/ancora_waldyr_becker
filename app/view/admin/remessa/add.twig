@@ -1,0 +1,49 @@
+{% extends "admin/layout.twig" %}
+{% block html_title %}Remessa - {{ parent() }}{% endblock %}
+{% set nav_active = 'role' %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{{ base_url() }}/admin">Início</a></li>
+  <li><a href="{{ base_url() }}/admin/remessa">Remessa</a></li>
+  <li class="active">Adicionar</li>
+</ol>
+{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-header" data-background-color="blue">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Adicionar Remessa</h3>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-6">
+        <form role="form" data-toggle="validator" action="{{ base_url() }}/admin/remessa/add" method="POST">
+          <div class="form-group">
+            <label for="quantity">Quantidade:</label>
+           <input type="number" class="form-control" id="inputQuantity" name="quantity" placeholder="">
+
+          </div>
+          <div class="form-group">
+            <label for="type">Tipo:</label>
+            <input id="type" class="form-control" type="text" name="type" placeholder="" required>
+          </div>
+
+          
+
+          <button type="submit" class="btn btn-success">Adicionar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "admin/layout.twig" %}
+{% block html_title %}Produtos - Administração - {{ parent() }}{% endblock %}
+{% set nav_active = 'products' %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li><a href="{{ base_url() }}/admin">Início</a></li>
+  <li><a href="{{ base_url() }}/admin/patients">Produtos</a></li>
+  <li class="active">Histórico</li>
+  <li >{{ products.name }}</li>
+</ol>
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+  <div class="card-header" data-background-color="blue">
+    <div class="row">
+      <div class="col-xs-12 ">
+        <h3>Histórico de Produtos - {{ products.name }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-striped data-table">
+          <thead>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Quantidade</th>
+          </thead>
+          <tbody>
+            {% for event_log in event_logs %}
+              <tr>
+                <td> {{ event_log.date }}</td>
+                <td>{{ event_log.event_log_types_name }}</td>
+                <td>{{ event_log.description }}</td>
+              </tr>
+            {% else %}
+              <div class="alert alert-danger" role="alert">Não foram encontrados eventos para este usuário.</div>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+
+<script src="{{ base_url() }}/js/jquery.mask.js"></script>
+
+
+<script type="text/javascript">
+
+$('#inputCpf').mask('000.000.000-00', {reverse: true});
+$('#inputCep').mask('00000-000');
+</script>
+
+{% endblock %}
